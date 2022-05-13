@@ -3,6 +3,16 @@ let config = {
     width: 960,
     height: 720,
     autoCenter: true,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: true,
+            gravity: {
+                x: 0,
+                y: 0
+            }
+        }
+    },
     scene: [Title, Play],
 };
 

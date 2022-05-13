@@ -6,6 +6,8 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     preload() {
         this.load.image('background', 'assets/placeholderBG.png')
         this.load.image('hugh', 'assets/hugh.png');
+        this.load.image('hughGray', 'assets/hughGray.png');
+        this.load.audio('wind', 'assets/wind.wav');
     }
 
     create(){
