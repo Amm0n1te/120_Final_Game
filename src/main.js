@@ -3,7 +3,7 @@ let config = {
     width: 960,
     height: 720,
     autoCenter: true,
-    scene: [Title,],
+    scene: [Title, Play],
 };
 
 let keyLEFT, keyRIGHT, spacebar; 
