@@ -7,11 +7,19 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('background', 'assets/placeholderBG.png')
         this.load.image('hugh', 'assets/hugh.png');
         this.load.image('hughGray', 'assets/hughGray.png');
+        this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.audio('wind', 'assets/wind.wav');
+
     }
 
     create(){
-        this.scene.start('play');
-        //this.testRect = this.add.rectangle(100, 300, 80, 130, 0xffffff);
+        spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.add.tileSprite(0, 0, 960, 720, 'titleScreen').setOrigin(0, 0);
+    }
+
+    update() {
+        if (Phaser.Input.Keyboard.JustDown(spacebar)) {
+            this.scene.start('play');
+        }
     }
 }
