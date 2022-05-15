@@ -23,6 +23,10 @@ class Player extends Phaser.GameObjects.Sprite {
             this.flipX = false;
             this.x += this.speed;
         }
+        
+        if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)) {
+            this.body.setVelocityY(-700);
+        }
 
         //color changing
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {

@@ -9,6 +9,7 @@ class Play extends Phaser.Scene {
         this.physics.world.gravity.y = 1000;
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.wind = this.sound.add('wind', {volume: 1.5});
         this.wind.play({loop: true});
