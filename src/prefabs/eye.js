@@ -1,7 +1,16 @@
-class Player extends Phaser.GameObjects.Sprite {
+class Eye extends Phaser.GameObjects.Sprite {
 
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
+        scene.add.existing(this);
+    }
+
+    create() {
+        console.log('eye created');
+    }
+
+    update() {
+        
     }
 
 }

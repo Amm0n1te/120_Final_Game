@@ -6,7 +6,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     preload() {
         this.load.image('background', 'assets/placeholderGray.png')
         this.load.image('hugh', 'assets/hugh.png');
-        this.load.image('hughGray', 'assets/hughDarkGray.png');
+        this.load.image('hughGray', 'assets/hughDarkGrey.png');
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.audio('wind', 'assets/wind.wav');
         this.load.image('floor', 'assets/ground.png');
@@ -22,6 +22,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
+        this.scene.start('play');
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
             this.scene.start('play');
         }
