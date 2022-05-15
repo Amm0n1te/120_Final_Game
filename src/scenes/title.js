@@ -9,7 +9,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('hughGray', 'assets/hughGray.png');
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.audio('wind', 'assets/wind.wav');
-
+        this.load.image('floor', 'assets/ground.png');
     }
 
     create(){
