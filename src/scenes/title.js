@@ -22,7 +22,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        this.scene.start('play');
+        //this.scene.start('play');
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
             this.scene.start('play');
         }

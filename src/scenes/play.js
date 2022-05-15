@@ -27,8 +27,8 @@ class Play extends Phaser.Scene {
         this.testPlatform.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.testPlatform);
 
-
         this.frontGround = this.add.sprite(game.config.width/2, 610, 'floor');
+        this.bottomGround = this.add.sprite(game.config.width/2, 730, 'floor');
         console.log("in play");
 
 
