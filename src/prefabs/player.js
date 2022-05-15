@@ -25,8 +25,14 @@ class Player extends Phaser.GameObjects.Sprite {
         }
         
         if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)) {
-            this.body.setVelocityY(-700);
+            this.body.setVelocityY(-900);
         }
+        /*if (this.body.touching.down && Phaser.Input.Keyboard.DownDuration(keyUP, 150)) {
+            this.body.setVelocityY(-400);
+        }
+        else if (this.body.touching.down && keyUP.isDown) {
+            this.body.setVelocityY(-700);
+        }*/
 
         //color changing
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
