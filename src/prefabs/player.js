@@ -2,6 +2,7 @@ class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
+        scene.physics.add.existing(this);
         this.speed = 1;
         this.color = 1;
     }
@@ -13,6 +14,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+        //movement controls
         if (keyLEFT.isDown && this.x > 0) {
             this.flipX = true;
             this.x -= this.speed;
@@ -22,6 +24,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.x += this.speed;
         }
 
+        //color changing
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
             console.log("spacebar detected");
             this.color *= -1;
@@ -32,5 +35,7 @@ class Player extends Phaser.GameObjects.Sprite {
         if (this.color == -1) {
             this.setTexture('hughGray');
         }
+
+        if (this.y > game.config.height) this.y = -100;
     }
 }
