@@ -3,7 +3,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         super("title");
     }
     
-    //bojken 2
+    //bojken 3
     preload() {
         this.load.image('background', 'assets/placeholderGray.png')
         this.load.image('hugh', 'assets/hugh.png');
