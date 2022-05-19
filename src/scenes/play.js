@@ -5,6 +5,7 @@ class Play extends Phaser.Scene {
 
 
     create() {
+        this.handEyeOffset = 30;
         this.MAX_VELOCITY = 300;
         this.physics.world.gravity.y = 2000;
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -31,11 +32,19 @@ class Play extends Phaser.Scene {
         this.bottomGround = this.add.sprite(game.config.width/2, 730, 'floor');
         console.log("in play");
 
-
+        this.frameTime = 0;
+        //this.physics.world.setFPS(60);
     }
 
-    update() {
-        this.hugh.update();
-        this.mist.tilePositionX += 1;
+    update(time, delta) {
+        this.frameTime += delta;
+        if (this.frameTime > 16.5) {
+            this.frameTime = 0;
+            //console.log(delta);
+            this.hugh.update();
+            this.eye.update();
+            this.eye.checkSight(this.hugh);
+            this.mist.tilePositionX += 1;
+        }
     }
 }

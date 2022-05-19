@@ -5,6 +5,7 @@ let config = {
     autoCenter: true,
     physics: {
         default: 'arcade',
+        fps: 60,
         arcade: {
             debug: false,
             gravity: {
