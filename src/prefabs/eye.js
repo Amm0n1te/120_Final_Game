@@ -22,7 +22,7 @@ class Eye extends Phaser.GameObjects.Sprite {
             ((Player.x > this.x && Player.x < this.x+this.width) || (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width))) {
             console.log("collision detected");
             this.spottedDuration++;
-            if (this.spottedDuration > 25) this.scene.scene.restart();
+            if (this.spottedDuration > 20) this.scene.scene.restart();
         } else this.spottedDuration = 0;
 
     }

@@ -3,7 +3,7 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
         scene.physics.add.existing(this);
-        this.speed = 4;
+        this.speed = 6;
         this.color = 1;
         this.camo = false;
     }
