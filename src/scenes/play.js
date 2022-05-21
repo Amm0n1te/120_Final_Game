@@ -34,12 +34,26 @@ class Play extends Phaser.Scene {
 
         this.frameTime = 0;
         //this.physics.world.setFPS(60);
-    }
+    }//bootyassbuttballspeenischeekspoopoopeepeecacadoodoosheissekusocoulemerdemierdacolanaalgasarschloechleanusnostaobojken
 
-    update(time, delta) {
+    update() {
+
+        if(((this.hugh.x > this.eye.x && this.hugh.x+this.hugh.width < this.eye.x+this.eye.width) 
+        || (this.hugh.x+this.hugh.width > this.eye.x && this.hugh.x < this.eye.x+this.eye.width))
+        && (this.hugh.color == -1)){
+            this.hugh.camo = true;
+        }else{
+            this.hugh.camo = false;
+        }
+        //=============debug===============
+        //console.log("hugh camo: ", this.hugh.camo);
+        //=================================
+
+        this.eye.update(this.hugh);
         this.hugh.update();
-        this.eye.update();
-        this.eye.checkSight(this.hugh);
+        //this.eye.checkSight(this.hugh);
         this.mist.tilePositionX += 1;
+
+
     }
 }

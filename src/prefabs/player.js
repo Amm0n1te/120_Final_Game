@@ -5,6 +5,7 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.physics.add.existing(this);
         this.speed = 4;
         this.color = 1;
+        this.camo = false;
     }
 
     create() {
@@ -48,4 +49,5 @@ class Player extends Phaser.GameObjects.Sprite {
 
         if (this.y > game.config.height) this.y = -100;
     }
+
 }
