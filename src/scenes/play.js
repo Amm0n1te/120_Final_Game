@@ -55,6 +55,11 @@ class Play extends Phaser.Scene {
             this.hugh.update();
             //this.eye.checkSight(this.hugh);
             this.mist.tilePositionX += 1;
+
+            if(this.hugh.x+this.hugh.width > game.config.width){
+                this.scene.start('title');
+            }
+
         }
 
     }
