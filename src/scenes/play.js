@@ -36,24 +36,26 @@ class Play extends Phaser.Scene {
         //this.physics.world.setFPS(60);
     }//bootyassbuttballspeenischeekspoopoopeepeecacadoodoosheissekusocoulemerdemierdacolanaalgasarschloechleanusnostaobojken
 
-    update() {
+    update(time, delta) {
+        this.frameTime += delta;
+        if (this.frameTime > 16.5) {
+            this.frameTime = 0;
+            if(((this.hugh.x > this.eye.x && this.hugh.x+this.hugh.width < this.eye.x+this.eye.width) 
+            || (this.hugh.x+this.hugh.width > this.eye.x && this.hugh.x < this.eye.x+this.eye.width))
+            && (this.hugh.color == -1)){
+                this.hugh.camo = true;
+            }else{
+                this.hugh.camo = false;
+            }
+            //=============debug===============
+            //console.log("hugh camo: ", this.hugh.camo);
+            //=================================
 
-        if(((this.hugh.x > this.eye.x && this.hugh.x+this.hugh.width < this.eye.x+this.eye.width) 
-        || (this.hugh.x+this.hugh.width > this.eye.x && this.hugh.x < this.eye.x+this.eye.width))
-        && (this.hugh.color == -1)){
-            this.hugh.camo = true;
-        }else{
-            this.hugh.camo = false;
+            this.eye.update(this.hugh);
+            this.hugh.update();
+            //this.eye.checkSight(this.hugh);
+            this.mist.tilePositionX += 1;
         }
-        //=============debug===============
-        //console.log("hugh camo: ", this.hugh.camo);
-        //=================================
-
-        this.eye.update(this.hugh);
-        this.hugh.update();
-        //this.eye.checkSight(this.hugh);
-        this.mist.tilePositionX += 1;
-
 
     }
 }
