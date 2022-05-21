@@ -37,14 +37,9 @@ class Play extends Phaser.Scene {
     }
 
     update(time, delta) {
-        this.frameTime += delta;
-        if (this.frameTime > 16.5) {
-            this.frameTime = 0;
-            //console.log(delta);
-            this.hugh.update();
-            this.eye.update();
-            this.eye.checkSight(this.hugh);
-            this.mist.tilePositionX += 1;
-        }
+        this.hugh.update();
+        this.eye.update();
+        this.eye.checkSight(this.hugh);
+        this.mist.tilePositionX += 1;
     }
 }
