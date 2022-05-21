@@ -18,7 +18,9 @@ class Play extends Phaser.Scene {
         this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
         this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
         this.hands = this.add.sprite(0, 0, 'hands').setOrigin(0, 0);
-        this.hugh = new Player(this, 290, 300, 'hugh').setOrigin(0,0);
+        this.cairn = this.add.sprite(520, 390, 'cairn').setOrigin(0, 0);
+        this.cairn.setScale(0.2);
+        this.hugh = new Player(this, 290, 445, 'hugh').setOrigin(0,0);
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
         this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
 
@@ -57,7 +59,7 @@ class Play extends Phaser.Scene {
             this.mist.tilePositionX += 1;
 
             if(this.hugh.x+this.hugh.width > game.config.width){
-                this.scene.start('title');
+                this.scene.start('forest');
             }
 
         }

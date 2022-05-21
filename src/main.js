@@ -14,7 +14,7 @@ let config = {
             }
         }
     },
-    scene: [Title, Play],
+    scene: [Title, Play, Forest],
 };
 
 let keyLEFT, keyRIGHT, keyUP, spacebar; 

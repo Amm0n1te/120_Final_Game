@@ -15,6 +15,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('mist', 'assets/mist.png');
         this.load.image('door', 'assets/door.png');
         this.load.image('eyeDown', 'assets/eyedown.png');
+        this.load.image('cairn', 'assets/crazy_cat_3.png');
     }
 
     create(){
