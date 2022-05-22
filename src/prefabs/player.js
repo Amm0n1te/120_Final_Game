@@ -20,6 +20,8 @@ class Player extends Phaser.GameObjects.Sprite {
         })
         
         this.isWalking = false;
+        this.leftWalking = false;
+        this.rightWalking = false;
     }
 
     create() {
@@ -31,23 +33,23 @@ class Player extends Phaser.GameObjects.Sprite {
     update() {
 
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
-            this.isWalking = true;
+            this.leftWalking = true;
             this.play('walking');
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)){
-            this.isWalking = true;
+            this.rightWalking = true;
             this.play('walking');
         }
 
         if(Phaser.Input.Keyboard.JustUp(keyRIGHT)){
-            this.isWalking = false;
-            this.play('idle');
+            this.rightWalking = false;
+            if (!this.leftWalking) this.play('idle');
         }
 
         if(Phaser.Input.Keyboard.JustUp(keyLEFT)){
-            this.isWalking = false;
-            this.play('idle');
+            this.leftWalking = false;
+            if (!this.rightWalking) this.play('idle');
         }
 
         //movement controls
