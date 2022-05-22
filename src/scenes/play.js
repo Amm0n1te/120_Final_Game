@@ -20,7 +20,7 @@ class Play extends Phaser.Scene {
         this.hands = this.add.sprite(0, 0, 'hands').setOrigin(0, 0);
         this.cairn = this.add.sprite(520, 390, 'cairn').setOrigin(0, 0);
         this.cairn.setScale(0.2);
-        this.hugh = new Player(this, 290, 445, 'hugh').setOrigin(0,0);
+        this.hugh = new Player(this, 290, 445, 'hugh', 0).setOrigin(0,0);
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
         this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
 

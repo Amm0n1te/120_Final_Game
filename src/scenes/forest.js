@@ -34,7 +34,7 @@ class Forest extends Phaser.Scene {
             this.frameTime = 0;
 
             this.hugh.update();
-            this.mist.tilePositionX += 100;
+            this.mist.tilePositionX += 1;
         }
     }
 }

@@ -10,8 +10,15 @@ class Player extends Phaser.GameObjects.Sprite {
             key: 'walking',
             frames: this.anims.generateFrameNumbers('hughWalkSheet', { start: 0, end: 4, }),
             repeat: -1,
-            frameRate: 2,
+            frameRate: 10,
         })
+        this.idle = this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNumbers('hugh', { start: 0, end:0, }),
+            repeat: -1,
+            frameRate: 0,
+        })
+        
         this.isWalking = false;
     }
 
@@ -22,19 +29,33 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+
+        if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
+            this.isWalking = true;
+            this.play('walking');
+        }
+
+        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)){
+            this.isWalking = true;
+            this.play('walking');
+        }
+
+        if(Phaser.Input.Keyboard.JustUp(keyRIGHT)){
+            this.isWalking = false;
+            this.play('idle');
+        }
+
+        if(Phaser.Input.Keyboard.JustUp(keyLEFT)){
+            this.isWalking = false;
+            this.play('idle');
+        }
+
         //movement controls
         if (keyLEFT.isDown && this.x > 0) {
-            if(!(this.anims.isPlaying && this.anims.currentAnim.key === 'walking')){
-                this.anims.play('walking');
-            }
-            
             this.flipX = true;
             this.x -= this.speed;
         }
         else if (keyRIGHT.isDown && this.x < game.config.width-this.width) {
-            if(!(this.anims.isPlaying && this.anims.currentAnim.key === 'walking')){
-                this.anims.play('walking');
-            }
             
             this.flipX = false;
             this.x += this.speed;
@@ -54,13 +75,15 @@ class Player extends Phaser.GameObjects.Sprite {
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
             console.log("spacebar detected");
             this.color *= -1;
+            if (this.color == 1) {
+                this.setTexture('hugh');
+            }
+            if (this.color == -1) {
+                this.setTexture('hughGray');
+            }
         }
-        if (this.color == 1) {
-            this.setTexture('hugh');
-        }
-        if (this.color == -1) {
-            this.setTexture('hughGray');
-        }
+
+
 
         if (this.y > game.config.height) this.y = -100;
     }
