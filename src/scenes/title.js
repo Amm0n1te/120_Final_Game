@@ -5,6 +5,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     
     //bojken 3
     preload() {
+        this.load.spritesheet('hughWalkSheet', 'assets/hughWalkSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 4});
         this.load.image('background', 'assets/placeholderGray.png')
         this.load.image('hugh', 'assets/hugh.png');
         this.load.image('hughGray', 'assets/hughDarkGrey.png');

@@ -6,6 +6,13 @@ class Player extends Phaser.GameObjects.Sprite {
         this.speed = 6;
         this.color = 1;
         this.camo = false;
+        this.walking = this.anims.create({
+            key: 'walking',
+            frames: this.anims.generateFrameNumbers('hughWalkSheet', { start: 0, end: 4, }),
+            repeat: -1,
+            frameRate: 2,
+        })
+        this.isWalking = false;
     }
 
     create() {
@@ -17,10 +24,18 @@ class Player extends Phaser.GameObjects.Sprite {
     update() {
         //movement controls
         if (keyLEFT.isDown && this.x > 0) {
+            if(!(this.anims.isPlaying && this.anims.currentAnim.key === 'walking')){
+                this.anims.play('walking');
+            }
+            
             this.flipX = true;
             this.x -= this.speed;
         }
         else if (keyRIGHT.isDown && this.x < game.config.width-this.width) {
+            if(!(this.anims.isPlaying && this.anims.currentAnim.key === 'walking')){
+                this.anims.play('walking');
+            }
+            
             this.flipX = false;
             this.x += this.speed;
         }
