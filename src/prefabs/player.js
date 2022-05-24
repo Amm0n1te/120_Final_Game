@@ -12,14 +12,34 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: -1,
             frameRate: 10,
         })
+        this.grayWalking = this.anims.create({
+            key: 'grayWalking',
+            frames: this.anims.generateFrameNumbers('hughWalkSheetGray', { start: 0, end: 4, }),
+            repeat: -1,
+            frameRate: 10
+        })
         this.idle = this.anims.create({
             key: 'idle',
             frames: this.anims.generateFrameNumbers('hugh', { start: 0, end:0, }),
             repeat: -1,
             frameRate: 0,
         })
+        this.grayIdle = this.anims.create({
+            key: 'grayIdle',
+            frames: this.anims.generateFrameNumbers('hughGrayIdleSheet', { start: 0, end: 0 }),
+            repeat: -1,
+            frameRate: 0
+        })
+        this.jumping = this.anims.create({
+            key: 'hughJump',
+            frames: this.anims.generateFrameNumbers('hughJump', { start: 0, end: 0 }),
+            repeat: 0,
+            frameRate: 10
+        })
         
         this.isWalking = false;
+        this.isJumping = false;
+        this.jumpControl = false;
         this.leftWalking = false;
         this.rightWalking = false;
     }
@@ -34,22 +54,29 @@ class Player extends Phaser.GameObjects.Sprite {
 
         if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
             this.leftWalking = true;
-            this.play('walking');
+            if (this.color == 1) this.play('walking');
+            else if (this.color == -1) this.play('grayWalking');
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)){
             this.rightWalking = true;
-            this.play('walking');
+            if (this.color == 1) this.play('walking');
+            else if (this.color == -1) this.play('grayWalking');
         }
 
         if(Phaser.Input.Keyboard.JustUp(keyRIGHT)){
             this.rightWalking = false;
-            if (!this.leftWalking) this.play('idle');
+            if (!this.leftWalking) {
+                if (this.color == 1) this.play('idle');
+                else if (this.color == -1) this.play('grayIdle');
+            }
         }
-
         if(Phaser.Input.Keyboard.JustUp(keyLEFT)){
             this.leftWalking = false;
-            if (!this.rightWalking) this.play('idle');
+            if (!this.rightWalking) {
+                if (this.color == 1) this.play('idle');
+                else if (this.color == -1) this.play('grayIdle');
+            }
         }
 
         //movement controls
@@ -63,9 +90,22 @@ class Player extends Phaser.GameObjects.Sprite {
             this.x += this.speed;
         }
         
+
+        /*if (this.body.touching.down) {
+            this.isJumping = false;
+            if (this.anims.isPlaying && player.anims.currentAnim.key === 'hughJump') {
+
+            }
+        }*/
         if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)) {
             this.body.setVelocityY(-900);
+            //this.isJumping = true;
+            //this.jumpControl = true;
         }
+        /*if (this.jumpControl == true) {
+            this.jumpControl = false;
+            this.play('hughJump');
+        }*/
         /*if (this.body.touching.down && Phaser.Input.Keyboard.DownDuration(keyUP, 150)) {
             this.body.setVelocityY(-400);
         }
