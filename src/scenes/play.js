@@ -20,6 +20,7 @@ class Play extends Phaser.Scene {
         this.hands = this.add.sprite(0, 0, 'hands').setOrigin(0, 0);
         this.cairn = this.add.sprite(520, 500, 'cairn').setOrigin(0, 0);
         this.cairn.setScale(1.2);
+        //this.cairn.name = 'cairn';
         this.hugh = new Player(this, 290, 445, 'hugh', 0).setOrigin(0,0);
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
         this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
@@ -32,16 +33,16 @@ class Play extends Phaser.Scene {
 
         this.frontGround = this.add.sprite(game.config.width/2, 610, 'floor');
         this.bottomGround = this.add.sprite(game.config.width/2, 730, 'floor');
-        console.log("in play");
 
         this.frameTime = 0;
-        //this.physics.world.setFPS(60);
+        this.strikeDistance = 40;
     }//bootyassbuttballspeenischeekspoopoopeepeecacadoodoosheissekusocoulemerdemierdacolanaalgasarschloechleanusnostaobojken
 
     update(time, delta) {
         this.frameTime += delta;
         if (this.frameTime > 16.5) {
             this.frameTime = 0;
+            //collision with eye's cone of vision
             if(((this.hugh.x > this.eye.x && this.hugh.x+this.hugh.width < this.eye.x+this.eye.width) 
             || (this.hugh.x+this.hugh.width > this.eye.x && this.hugh.x < this.eye.x+this.eye.width))
             && (this.hugh.color == -1)){
@@ -49,15 +50,34 @@ class Play extends Phaser.Scene {
             }else{
                 this.hugh.camo = false;
             }
+
             //=============debug===============
             //console.log("hugh camo: ", this.hugh.camo);
             //=================================
+            if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
+                if (this.hugh.flipX == false) { //check if he hit something when he's facing right
+                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.cairn.x+this.cairn.width)) {
+                        this.hugh.color *= -1;
+                    }
+                }
+                else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
+                    if ((this.hugh.x-this.strikeDistance > this.cairn.x && this.hugh.x-this.strikeDistance < this.cairn.x+this.cairn.width)) {
+                        this.hugh.color *= -1;
+                    }
+                }
+                if (this.hugh.color == 1) {
+                    this.hugh.play('idle');
+                }
+                else if (this.hugh.color == -1) {
+                    this.hugh.play('grayIdle');
+                }
+            }
 
-            this.eye.update(this.hugh);
             this.hugh.update();
-            //this.eye.checkSight(this.hugh);
+            this.eye.update(this.hugh);
             this.mist.tilePositionX += 1;
 
+            //go to next scene
             if(this.hugh.x+this.hugh.width > game.config.width){
                 this.scene.start('forest');
             }

@@ -36,12 +36,19 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: 0,
             frameRate: 10
         })
+        this.hitting = this.anims.create({
+            key: 'hughHit',
+            frames: this.anims.generateFrameNumbers('hughHit', {start: 0, end: 8}),
+            repeat: 0,
+            frameRate: 60
+        })
         
         this.isWalking = false;
         this.isJumping = false;
         this.jumpControl = false;
         this.leftWalking = false;
         this.rightWalking = false;
+        this.spacebools = false;
     }
 
     create() {
@@ -114,16 +121,19 @@ class Player extends Phaser.GameObjects.Sprite {
         }*/
 
         //color changing
-        if (Phaser.Input.Keyboard.JustDown(spacebar)) {
-            console.log("spacebar detected");
-            this.color *= -1;
-            if (this.color == 1) {
-                this.setTexture('hugh');
+        //apparently, Phaser.Input.Keyboard.JustDown(spacebar) only works once in the same tick.  I've used it once in Play update, so 
+        //I resort to using a bool to make it trigger once for each button press.
+        if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false) {
+            this.spacebools = true;
+            if (this.color == 1) { //1 is black
+                console.log("hit from within player object");
+                this.play('hughHit');
             }
-            if (this.color == -1) {
-                this.setTexture('hughGray');
+            if (this.color == -1) { //-1 is grey
+                this.play('hughHit'); //replace this with hughHitGrey
             }
         }
+        if (!spacebar.isDown) this.spacebools = false;
 
 
 
