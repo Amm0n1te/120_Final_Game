@@ -18,10 +18,10 @@ class Play extends Phaser.Scene {
         this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
         this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
         this.hands = this.add.sprite(0, 0, 'hands').setOrigin(0, 0);
-        this.cairn = this.add.sprite(520, 500, 'cairn').setOrigin(0, 0);
-        this.cairn.setScale(1.2);
+        this.shrine = this.add.sprite(460, 500, 'shrine').setOrigin(0, 0);
+        this.shrine.setScale(1.2);
         //this.cairn.name = 'cairn';
-        this.hugh = new Player(this, 290, 445, 'hugh', 0).setOrigin(0,0);
+        this.hugh = new Player(this, 88, 445, 'hugh', 0).setOrigin(0,0);
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
         this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
 
@@ -51,19 +51,17 @@ class Play extends Phaser.Scene {
                 this.hugh.camo = false;
             }
 
-            //=============debug===============
-            //console.log("hugh camo: ", this.hugh.camo);
-            //=================================
+            //hugh hitting checking
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
                 console.log(this.hugh.color)
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
-                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.cairn.x+this.cairn.width)) {
-                        this.hugh.color *= -1;
+                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.shrine.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.shrine.x+this.shrine.width)) {
+                        this.hugh.color = -1;
                     }
                 }
                 else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
-                    if ((this.hugh.x-this.strikeDistance > this.cairn.x && this.hugh.x-this.strikeDistance < this.cairn.x+this.cairn.width)) {
-                        this.hugh.color *= -1;
+                    if ((this.hugh.x-this.strikeDistance > this.shrine.x && this.hugh.x-this.strikeDistance < this.shrine.x+this.shrine.width)) {
+                        this.hugh.color = -1;
                     }
                 }
                 console.log("hugh color is ", this.hugh.color);
