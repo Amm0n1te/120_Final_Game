@@ -18,21 +18,21 @@ class Forest extends Phaser.Scene {
         this.frameTime = 0;
 
         //add background elements
-        MAKE SURE TO SWITCH POSITIONS OF BLACK AND GRAY HANDS!
-        this.rightHand = this.add.sprite(300, 400, 'rightHand').setOrigin(0.5,0.5);
-        this.leftHand = this.add.sprite(200, 400, 'leftHand').setOrigin(0.5,0.5);
+        //MAKE SURE TO SWITCH POSITIONS OF BLACK AND GRAY HANDS!
+        this.rightHand = this.add.sprite(750, 400, 'rightHand').setOrigin(0.5,0.5);
+        this.leftHand = this.add.sprite(650, 400, 'leftHand').setOrigin(0.5,0.5);
 
-        this.rightHandGray = this.add.sprite(600, 400, 'rightHandGray');
-        this.leftHandGray = this.add.sprite(750, 500, 'leftHandGray');
+        this.rightHandGray = this.add.sprite(130, 400, 'rightHandGray');//600 750
+        this.leftHandGray = this.add.sprite(300, 500, 'leftHandGray');
 
         this.cairn = this.add.sprite(420, 500, 'cairn').setOrigin(0, 0);
         this.cairn.setScale(1.2);
 
-        this.hugh = new Player(this, 290, 445, 'hugh').setOrigin(0,0);
+        this.hugh = new Player(this, 20, 445, 'hugh').setOrigin(0,0);
         this.hugh.color = -1;
         this.hugh.play('grayIdle');
+        this.strikeDistance = 40;
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
-
         this.frontGround = this.add.sprite(game.config.width/2, 610, 'floor');
         this.bottomGround = this.physics.add.sprite(game.config.width/2, 640, 'floor');
         this.bottomGround.body.immovable = true;
@@ -59,7 +59,31 @@ class Forest extends Phaser.Scene {
             }
 
 
-            this.eye.x -= 8;
+            
+            //hugh hitting checking
+            if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
+                console.log(this.hugh.color)
+                if (this.hugh.flipX == false) { //check if he hit something when he's facing right
+                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.cairn.x+this.cairn.width)) {
+                        this.hugh.color = 1;
+                    }
+                }
+                else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
+                    if ((this.hugh.x-this.strikeDistance > this.cairn.x && this.hugh.x-this.strikeDistance < this.cairn.x+this.cairn.width)) {
+                        this.hugh.color = 1;
+                    }
+                }
+                console.log("hugh color is ", this.hugh.color);
+                if (this.hugh.color == 1) {
+                    this.hugh.play('idle');
+                }
+                else if (this.hugh.color == -1) {
+                    this.hugh.play('grayIdle');
+                }
+            }
+
+
+            this.eye.x -= 7;
             if (this.eye.x < -200) this.eye.x = game.config.width + 200;
             
             this.hugh.update();
