@@ -55,6 +55,7 @@ class Play extends Phaser.Scene {
             //console.log("hugh camo: ", this.hugh.camo);
             //=================================
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
+                console.log(this.hugh.color)
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
                     if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.cairn.x+this.cairn.width)) {
                         this.hugh.color *= -1;

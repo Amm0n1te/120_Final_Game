@@ -11,7 +11,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.spritesheet('hugh', 'assets/hugh.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 0});
         this.load.image('hughGray', 'assets/hughDarkGrey.png');
         this.load.spritesheet('hughGrayIdleSheet', 'assets/hughDarkGrey.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 0});
-        this.load.spritesheet('hughJump', 'assets/hughJump.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 6});
+        this.load.spritesheet('hughJump', 'assets/hughJump.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 9});
         this.load.spritesheet('hughHit', 'assets/hughHitSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 8});
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.audio('wind', 'assets/wind.wav');

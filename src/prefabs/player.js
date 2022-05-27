@@ -32,7 +32,7 @@ class Player extends Phaser.GameObjects.Sprite {
         })
         this.jumping = this.anims.create({
             key: 'hughJump',
-            frames: this.anims.generateFrameNumbers('hughJump', { start: 0, end: 0 }),
+            frames: this.anims.generateFrameNumbers('hughJump', { start: 0, end: 9 }),
             repeat: 0,
             frameRate: 10
         })
@@ -106,7 +106,10 @@ class Player extends Phaser.GameObjects.Sprite {
         }*/
         if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)) {
             this.body.setVelocityY(-900);
-            //this.isJumping = true;
+            this.isJumping = true;
+            this.play('hughJump');
+            //stop all running animations
+            //start jump animations
             //this.jumpControl = true;
         }
         /*if (this.jumpControl == true) {
