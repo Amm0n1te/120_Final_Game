@@ -66,6 +66,7 @@ class Play extends Phaser.Scene {
                         this.hugh.color *= -1;
                     }
                 }
+                console.log("hugh color is ", this.hugh.color);
                 if (this.hugh.color == 1) {
                     this.hugh.play('idle');
                 }

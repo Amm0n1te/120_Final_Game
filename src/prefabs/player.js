@@ -42,6 +42,12 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: 0,
             frameRate: 60
         })
+        this.hittingGray = this.anims.create({
+            key: 'hughHitGray',
+            frames: this.anims.generateFrameNumbers('hughHitGray', {start: 0, end: 8}),
+            repeat: 0,
+            frameRate: 60
+        })
         
         this.isWalking = false;
         this.isJumping = false;
@@ -129,12 +135,19 @@ class Player extends Phaser.GameObjects.Sprite {
         if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false) {
             this.spacebools = true;
             if (this.color == 1) { //1 is black
-                console.log("hit from within player object");
+                console.log("should have played black");
                 this.play('hughHit');
             }
             if (this.color == -1) { //-1 is grey
-                this.play('hughHit'); //replace this with hughHitGrey
+                console.log("should have played gray");
+                this.play('hughHitGray'); //replace this with hughHitGrey
             }
+            /*if (this.color == 1) {
+                this.play('idle');
+            }
+            else if (this.color == -1) {
+                this.play('grayIdle');
+            }*/
         }
         if (!spacebar.isDown) this.spacebools = false;
 
