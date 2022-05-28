@@ -2,10 +2,19 @@ class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
+        scene.tweens.add({
+            targets: this,
+            scale: 1.05,
+            duration: 500,
+            ease: "Sine.easeInOut",
+            yoyo: true,
+            repeat: -1,
+        });
         scene.physics.add.existing(this);
         this.speed = 6;
         this.color = 1;
         this.camo = false;
+        this.dying = false;
         this.walking = this.anims.create({
             key: 'walking',
             frames: this.anims.generateFrameNumbers('hughWalkSheet', { start: 0, end: 4, }),
@@ -54,6 +63,12 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: 0,
             frameRate: 60
         })
+        this.death = this.anims.create({
+            key: 'hughDeath',
+            frames: this.anims.generateFrameNumbers('hughDeath', {start: 0, end: 22}),
+            repeat: 0,
+            frameRate: 30
+        })
         
         this.isWalking = false;
         this.isJumping = false;
@@ -71,26 +86,26 @@ class Player extends Phaser.GameObjects.Sprite {
 
     update() {
 
-        if(Phaser.Input.Keyboard.JustDown(keyLEFT)){
+        if(Phaser.Input.Keyboard.JustDown(keyLEFT) && this.dying == false){
             this.leftWalking = true;
             if (this.color == 1) this.play('walking');
             else if (this.color == -1) this.play('grayWalking');
         }
 
-        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)){
+        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)&& this.dying == false){
             this.rightWalking = true;
             if (this.color == 1) this.play('walking');
             else if (this.color == -1) this.play('grayWalking');
         }
 
-        if(Phaser.Input.Keyboard.JustUp(keyRIGHT)){
+        if(Phaser.Input.Keyboard.JustUp(keyRIGHT)&& this.dying == false){
             this.rightWalking = false;
             if (!this.leftWalking) {
                 if (this.color == 1) this.play('idle');
                 else if (this.color == -1) this.play('grayIdle');
             }
         }
-        if(Phaser.Input.Keyboard.JustUp(keyLEFT)){
+        if(Phaser.Input.Keyboard.JustUp(keyLEFT)&& this.dying == false){
             this.leftWalking = false;
             if (!this.rightWalking) {
                 if (this.color == 1) this.play('idle');
@@ -99,11 +114,11 @@ class Player extends Phaser.GameObjects.Sprite {
         }
 
         //movement controls
-        if (keyLEFT.isDown && this.x > 0) {
+        if (keyLEFT.isDown && this.x > 0 && this.dying == false) {
             this.flipX = true;
             this.x -= this.speed;
         }
-        else if (keyRIGHT.isDown && this.x < game.config.width-this.width) {
+        else if (keyRIGHT.isDown && this.x < game.config.width-this.width && this.dying == false) {
             
             this.flipX = false;
             this.x += this.speed;
@@ -116,7 +131,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
             }
         }*/
-        if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)) {
+        if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)&& this.dying == false) {
             this.body.setVelocityY(-900);
             this.isJumping = true;
             if(this.color == 1){
@@ -165,6 +180,18 @@ class Player extends Phaser.GameObjects.Sprite {
 
 
         if (this.y > game.config.height) this.y = -100;
+    }
+
+    die(){
+        this.dying = true;
+        //this.stop('idle');
+        this.play('hughDeath');
+        this.on('animationcomplete', () => {
+            //this.time.delayedCall(500, () => { 
+                //this.playMusic.stop();
+                this.scene.scene.restart();
+            //}, null, this);
+        });
     }
 
 }

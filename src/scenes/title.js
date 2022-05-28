@@ -15,6 +15,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.spritesheet('hughJumpGray', 'assets/hughJumpGray.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 9});
         this.load.spritesheet('hughHit', 'assets/hughHitSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 8});
         this.load.spritesheet('hughHitGray', 'assets/hughHitSheetGray.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 8});
+        this.load.spritesheet('hughDeath', 'assets/hughDeathSheet.png', {frameWidth:80, frameHeight: 130, startFrame: 0, endFrame: 22});
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.audio('wind', 'assets/wind.wav');
         this.load.image('floor', 'assets/ground.png');
@@ -35,13 +36,13 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     create(){
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.add.tileSprite(0, 0, 960, 720, 'titleScreen').setOrigin(0, 0);
-        this.scene.start('forest');
+        //this.scene.start('forest');
     }
 
     update() {
         //this.scene.start('play');
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
-            this.scene.start('forest');
+            this.scene.start('play');
         }
     }
 }

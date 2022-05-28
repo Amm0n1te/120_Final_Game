@@ -55,7 +55,7 @@ class Play extends Phaser.Scene {
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
                 console.log(this.hugh.color)
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
-                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.shrine.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.shrine.x+this.shrine.width)) {
+                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.shrine.x && this.hugh.x < this.shrine.x+this.shrine.width)) {
                         this.hugh.color = -1;
                     }
                 }
@@ -78,7 +78,7 @@ class Play extends Phaser.Scene {
             this.mist.tilePositionX += 1;
 
             //go to next scene
-            if(this.hugh.x+this.hugh.width > game.config.width){
+            if(this.hugh.x+this.hugh.width >= game.config.width){
                 this.scene.start('forest');
             }
 

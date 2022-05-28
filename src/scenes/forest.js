@@ -33,6 +33,7 @@ class Forest extends Phaser.Scene {
         this.hugh.play('grayIdle');
         this.strikeDistance = 40;
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
+        this.eye.maxSpotted = 10;
         this.frontGround = this.add.sprite(game.config.width/2, 610, 'floor');
         this.bottomGround = this.physics.add.sprite(game.config.width/2, 640, 'floor');
         this.bottomGround.body.immovable = true;
@@ -50,7 +51,7 @@ class Forest extends Phaser.Scene {
             if (this.hugh.x > this.leftHand.x - 80 && this.hugh.x < this.rightHand.x - 40 && this.hugh.color == 1){
                 this.hugh.camo = true;
                 console.log("camo");
-            } else if (this.hugh.x > this.leftHandGray.x - 80 && this.hugh.x < this.rightHandGray.x - 40 && this.hugh.color == 1){
+            } else if (this.hugh.x > this.rightHandGray.x - 80 && this.hugh.x < this.leftHandGray.x - 40 && this.hugh.color == -1){
                 this.hugh.camo = true;
                 console.log("grayCamo");
             }else{
@@ -64,7 +65,7 @@ class Forest extends Phaser.Scene {
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
                 console.log(this.hugh.color)
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
-                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x+this.hugh.width+this.strikeDistance < this.cairn.x+this.cairn.width)) {
+                    if ((this.hugh.x+this.hugh.width+this.strikeDistance >= this.cairn.x && this.hugh.x < this.cairn.x+this.cairn.width)) {
                         this.hugh.color = 1;
                     }
                 }
@@ -87,6 +88,7 @@ class Forest extends Phaser.Scene {
             if (this.eye.x < -200) this.eye.x = game.config.width + 200;
             
             this.hugh.update();
+            this.eye.update(this.hugh);
             this.mist.tilePositionX += 1;
         }
 

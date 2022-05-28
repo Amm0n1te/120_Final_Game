@@ -5,6 +5,7 @@ class Eye extends Phaser.GameObjects.Sprite {
         this.scene = scene;
         scene.add.existing(this);
         this.spottedDuration = 0;
+        this.maxSpotted = 20;
     }
 
     create() {
@@ -22,7 +23,9 @@ class Eye extends Phaser.GameObjects.Sprite {
             ((Player.x > this.x && Player.x < this.x+this.width) || (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width))) {
             console.log("collision detected");
             this.spottedDuration++;
-            if (this.spottedDuration > 20) this.scene.scene.restart();
+            if (this.spottedDuration == this.maxSpotted){
+                Player.die();
+            } 
         } else this.spottedDuration = 0;
 
     }
