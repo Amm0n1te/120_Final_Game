@@ -5,7 +5,7 @@ class Player extends Phaser.GameObjects.Sprite {
         scene.tweens.add({
             targets: this,
             scale: 1.05,
-            duration: 500,
+            duration: 900,
             ease: "Sine.easeInOut",
             yoyo: true,
             repeat: -1,
