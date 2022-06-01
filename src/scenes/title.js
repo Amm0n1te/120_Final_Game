@@ -5,10 +5,11 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     
     //bojken 3
     preload() {
-
+        //title stuff
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.image('keysImage', 'assets/keysPlaceholder.png');
 
+        //level 1
         this.load.spritesheet('hughWalkSheet', 'assets/hughWalkSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 4});
         this.load.spritesheet('hughWalkSheetGray', 'assets/hughWalkSheetGray.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 4});
         this.load.image('background', 'assets/placeholderGray.png')
@@ -36,8 +37,11 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('leftHandGray', 'assets/leftHandGray.png');
 
         //level 3
-        this.load.image('blackPlatform', 'assets/blackPlatformPlaceholder.png');
-        this.load.image('grayPlatform', 'assets/grayPlatformPlaceholder.png');
+        this.load.spritesheet('blackPlatform', 'assets/shadowPlatformSheet.png', {frameWidth: 700, frameHeight: 28, startFrame: 0, endFrame: 2});
+        this.load.spritesheet('moonPlatform', 'assets/moonPlatformSheet.png', {frameWidth: 700, frameHeight: 28, startFrame: 0, endFrame: 2});
+        this.load.image('sideeye', 'assets/sideeye.png');
+        this.load.image('sideeye', 'assets/sideeyebeam.png');
+        this.load.image('ledge', 'assets/ledge.png');
     }
 
     create(){
@@ -49,7 +53,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        //this.scene.start('crevice');
+        this.scene.start('crevice');
 
         //finished is a variable that keeps track of whether or not the player has played through the game once already.
         //we don't want to show the controls to a player who has already beaten the game.

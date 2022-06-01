@@ -55,7 +55,7 @@ class Play extends Phaser.Scene {
             }
 
             //hugh hitting checking
-            if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
+            if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown && this.hugh.body.touching.down) {
                 console.log(this.hugh.color)
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
                     if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.shrine.x && this.hugh.x < this.shrine.x+this.shrine.width)) {
@@ -63,7 +63,7 @@ class Play extends Phaser.Scene {
                     }
                 }
                 else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
-                    if ((this.hugh.x-this.strikeDistance > this.shrine.x && this.hugh.x-this.strikeDistance < this.shrine.x+this.shrine.width)) {
+                    if ((this.hugh.x-this.strikeDistance < this.shrine.x+this.shrine.width && this.hugh.x > this.shrine.x)) {
                         this.hugh.color = -1;
                     }
                 }

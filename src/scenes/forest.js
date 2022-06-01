@@ -65,15 +65,15 @@ class Forest extends Phaser.Scene {
 
             
             //hugh hitting checking
-            if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
-                console.log(this.hugh.color)
+            if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown && this.hugh.body.touching.down) {
+                console.log(this.hugh.x+this.hugh.width+this.strikeDistance, " > ", this.cairn.x);
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
-                    if ((this.hugh.x+this.hugh.width+this.strikeDistance >= this.cairn.x && this.hugh.x < this.cairn.x+this.cairn.width)) {
+                    if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x < this.cairn.x+this.cairn.width)) {
                         this.hugh.color = 1;
                     }
                 }
                 else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
-                    if ((this.hugh.x-this.strikeDistance > this.cairn.x && this.hugh.x-this.strikeDistance < this.cairn.x+this.cairn.width)) {
+                    if ((this.hugh.x-this.strikeDistance < this.cairn.x+this.cairn.width && this.hugh.x > this.cairn.x)) {
                         this.hugh.color = 1;
                     }
                 }

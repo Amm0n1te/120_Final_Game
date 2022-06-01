@@ -69,6 +69,8 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: 0,
             frameRate: 30
         })
+
+        this.strikeDistance = 40;
         
         this.isWalking = false;
         this.isJumping = false;
@@ -158,8 +160,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //color changing
         //apparently, Phaser.Input.Keyboard.JustDown(spacebar) only works once in the same tick.  I've used it once in Play update, so 
         //I resort to using a bool to make it trigger once for each button press.
-        if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false && !this.dying) {
-            console.log("ass");
+        if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false && !this.dying && this.body.touching.down) {
             this.spacebools = true;
             if (this.color == 1) { //1 is black
                 console.log("should have played black");
