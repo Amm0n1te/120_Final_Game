@@ -90,6 +90,10 @@ class Forest extends Phaser.Scene {
             this.hugh.update();
             this.eye.update(this.hugh);
             this.mist.tilePositionX += 1;
+
+            if(this.hugh.x+this.hugh.width >= game.config.width){
+                this.scene.start('crevice');
+            }
         }
 
     }
