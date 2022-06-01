@@ -54,8 +54,8 @@ class Crevice extends Phaser.Scene {
 
         this.hugh = new Player(this, 20, 0, 'hugh').setOrigin(0,0);
         this.strikeDistance = 40;
-        this.physics.add.collider(this.hugh, this.grayPlatform1);
-        this.physics.add.collider(this.hugh, this.blackPlatform1);
+        this.grayCollider = this.physics.add.collider(this.hugh, this.grayPlatform1);
+        this.blackCollider = this.physics.add.collider(this.hugh, this.blackPlatform1);
         this.physics.add.collider(this.hugh, this.ledge);
 
         this.groundground = this.add.sprite(game.config.width/2, 757, 'floor');
@@ -83,15 +83,15 @@ class Crevice extends Phaser.Scene {
                         //console.log(this.hugh.x, " < ", this.shrine.x+this.shrine.width)
                         if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.shrine.x && this.hugh.x < this.shrine.x+this.shrine.width)
                         && this.hugh.y < this.ybound) {
-                            console.log("joaisdf");
-                            this.hugh.color = -1;
-                            this.physics.remove.collider(this.hugh, this.grayPlatform1);
+                            this.hugh.color = -1
+                            this.grayCollider.active = false;
                         }
                     }
                     else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
                         if ((this.hugh.x-this.strikeDistance < this.shrine.x+this.shrine.width && this.hugh.x > this.shrine.x)
                         && this.hugh.y < this.ybound) {
                             this.hugh.color = -1;
+                            this.grayCollider.active = false;
                         }
                     }
                     console.log("this.hugh.color = ", this.hugh.color);
@@ -100,12 +100,14 @@ class Crevice extends Phaser.Scene {
                         if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x < this.cairn.x+this.cairn.width)
                         && this.hugh.y > this.ybound) {
                             this.hugh.color = 1;
+                            this.blackCollider.active = false;
                         }
                     }
                     else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
                         if ((this.hugh.x-this.strikeDistance < this.cairn.x+this.cairn.width && this.hugh.x > this.cairn.x)
                         && this.hugh.y > this.ybound) {
-                            this.hugh.color = 1; 
+                            this.hugh.color = 1;
+                            this.blackCollider.active = false; 
                         }
                     }
                 }
