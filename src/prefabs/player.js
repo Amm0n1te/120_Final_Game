@@ -12,7 +12,7 @@ class Player extends Phaser.GameObjects.Sprite {
         });
         scene.physics.add.existing(this);
         this.speed = 6;
-        this.color = 1;
+        this.color = 1;  //1 is black, -1 is gray
         this.camo = false;
         this.dying = false;
         this.walking = this.anims.create({
@@ -158,7 +158,8 @@ class Player extends Phaser.GameObjects.Sprite {
         //color changing
         //apparently, Phaser.Input.Keyboard.JustDown(spacebar) only works once in the same tick.  I've used it once in Play update, so 
         //I resort to using a bool to make it trigger once for each button press.
-        if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false) {
+        if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false && !this.dying) {
+            console.log("ass");
             this.spacebools = true;
             if (this.color == 1) { //1 is black
                 console.log("should have played black");
@@ -168,12 +169,6 @@ class Player extends Phaser.GameObjects.Sprite {
                 console.log("should have played gray");
                 this.play('hughHitGray'); //replace this with hughHitGrey
             }
-            /*if (this.color == 1) {
-                this.play('idle');
-            }
-            else if (this.color == -1) {
-                this.play('grayIdle');
-            }*/
         }
         if (!spacebar.isDown) this.spacebools = false;
 
@@ -184,11 +179,13 @@ class Player extends Phaser.GameObjects.Sprite {
 
     die(){
         this.dying = true;
+        this.scene.input.keyboard.enabled = false;
         //this.stop('idle');
         this.play('hughDeath');
         this.on('animationcomplete', () => {
             //this.time.delayedCall(500, () => { 
                 //this.playMusic.stop();
+                this.scene.input.keyboard.enabled = true;
                 this.scene.scene.restart();
             //}, null, this);
         });

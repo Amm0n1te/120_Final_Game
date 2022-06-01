@@ -31,6 +31,10 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('rightHandGray', 'assets/rightHandGray.png');
         this.load.image('leftHand', 'assets/leftHand.png');
         this.load.image('leftHandGray', 'assets/leftHandGray.png');
+
+        //level 3
+        this.load.image('blackPlatform', 'assets/blackPlatformPlaceholder.png');
+        this.load.image('grayPlatform', 'assets/grayPlatformPlaceholder.png');
     }
 
     create(){
@@ -40,7 +44,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        //this.scene.start('play');
+        this.scene.start('crevice');
         if (Phaser.Input.Keyboard.JustDown(spacebar)) {
             this.scene.start('play');
         }
