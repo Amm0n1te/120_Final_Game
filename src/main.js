@@ -18,5 +18,6 @@ let config = {
 };
 
 let keyLEFT, keyRIGHT, keyUP, spacebar; 
+let finished = false;
 
 let game = new Phaser.Game(config);
