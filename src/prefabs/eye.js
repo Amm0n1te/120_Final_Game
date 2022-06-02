@@ -9,7 +9,6 @@ class Eye extends Phaser.GameObjects.Sprite {
     }
 
     create() {
-        console.log('eye created');
         this.physics.add.collider(this, Player);
     }
 
@@ -21,7 +20,6 @@ class Eye extends Phaser.GameObjects.Sprite {
         //console.log(Player.x, " > ", this.x, "   &&   ", Player.x, " < ", this.x+this.width);
         if (Player.camo == false &&
             ((Player.x > this.x && Player.x < this.x+this.width) || (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width))) {
-            console.log("collision detected");
             this.spottedDuration++;
             if (this.spottedDuration == this.maxSpotted){
                 Player.die();

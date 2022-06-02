@@ -125,14 +125,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.flipX = false;
             this.x += this.speed;
         }
-        
 
-        /*if (this.body.touching.down) {
-            this.isJumping = false;
-            if (this.anims.isPlaying && player.anims.currentAnim.key === 'hughJump') {
-
-            }
-        }*/
         if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)&& this.dying == false) {
             this.body.setVelocityY(-900);
             this.isJumping = true;
@@ -146,16 +139,6 @@ class Player extends Phaser.GameObjects.Sprite {
             //start jump animations
             //this.jumpControl = true;
         }
-        /*if (this.jumpControl == true) {
-            this.jumpControl = false;
-            this.play('hughJump');
-        }*/
-        /*if (this.body.touching.down && Phaser.Input.Keyboard.DownDuration(keyUP, 150)) {
-            this.body.setVelocityY(-400);
-        }
-        else if (this.body.touching.down && keyUP.isDown) {
-            this.body.setVelocityY(-700);
-        }*/
 
         //color changing
         //apparently, Phaser.Input.Keyboard.JustDown(spacebar) only works once in the same tick.  I've used it once in Play update, so 
@@ -163,11 +146,9 @@ class Player extends Phaser.GameObjects.Sprite {
         if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false && !this.dying && this.body.touching.down) {
             this.spacebools = true;
             if (this.color == 1) { //1 is black
-                console.log("should have played black");
                 this.play('hughHit');
             }
             if (this.color == -1) { //-1 is grey
-                console.log("should have played gray");
                 this.play('hughHitGray'); //replace this with hughHitGrey
             }
         }

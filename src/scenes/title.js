@@ -53,7 +53,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        this.scene.start('crevice');
+        //this.scene.start('textTransition');
 
         //finished is a variable that keeps track of whether or not the player has played through the game once already.
         //we don't want to show the controls to a player who has already beaten the game.
@@ -64,10 +64,10 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
                 this.showKeys = true;
             }
             if (this.showKeys == true) {
-                if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('play');
+                if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('textTransition');
             }
         } else if (finished) {
-            if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('play');
+            if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('textTransition');
         }
     }
 }

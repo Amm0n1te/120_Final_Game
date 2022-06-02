@@ -82,7 +82,7 @@ class Play extends Phaser.Scene {
 
             //go to next scene
             if(this.hugh.x+this.hugh.width >= game.config.width){
-                this.scene.start('forest');
+                this.scene.start('textTransition');
             }
 
         }

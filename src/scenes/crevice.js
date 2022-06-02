@@ -79,8 +79,6 @@ class Crevice extends Phaser.Scene {
                 this.ybound = this.shrine.y;
                 if (this.hugh.color == 1) {//if hugh color is black, check for hitting shrine
                     if (this.hugh.flipX == false) { //check if he hit something when he's facing right
-                        //console.log(this.hugh.x+this.hugh.width+this.strikeDistance, " > ", this.shrine.x);
-                        //console.log(this.hugh.x, " < ", this.shrine.x+this.shrine.width)
                         if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.shrine.x && this.hugh.x < this.shrine.x+this.shrine.width)
                         && this.hugh.y < this.ybound) {
                             this.hugh.color = -1
@@ -94,7 +92,6 @@ class Crevice extends Phaser.Scene {
                             this.grayCollider.active = false;
                         }
                     }
-                    console.log("this.hugh.color = ", this.hugh.color);
                 } else if (this.hugh.color == -1) { //if hugh is grey, check if he is hitting a cairn
                     if (this.hugh.flipX == false) { //check if he hit something when he's facing right
                         if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x < this.cairn.x+this.cairn.width)
@@ -112,7 +109,6 @@ class Crevice extends Phaser.Scene {
                     }
                 }
 
-                console.log("hugh color is ", this.hugh.color);
                 if (this.hugh.color == 1) {
                     this.hugh.play('idle');
                 }

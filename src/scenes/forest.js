@@ -4,9 +4,6 @@ class Forest extends Phaser.Scene {
     }
 
     create() {
-        //keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        //keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        //keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -53,20 +50,16 @@ class Forest extends Phaser.Scene {
             //Setting and checking Hugh camo for black hands
             if (this.hugh.x > this.leftHand.x - 80 && this.hugh.x < this.rightHand.x - 40 && this.hugh.color == 1){
                 this.hugh.camo = true;
-                console.log("camo");
             } else if (this.hugh.x > this.rightHandGray.x - 80 && this.hugh.x < this.leftHandGray.x - 40 && this.hugh.color == -1){
                 this.hugh.camo = true;
-                console.log("grayCamo");
             }else{
                 this.hugh.camo = false;
-                console.log("no camo");
             }
 
 
             
             //hugh hitting checking
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown && this.hugh.body.touching.down) {
-                console.log(this.hugh.x+this.hugh.width+this.strikeDistance, " > ", this.cairn.x);
                 if (this.hugh.flipX == false) { //check if he hit something when he's facing right
                     if ((this.hugh.x+this.hugh.width+this.strikeDistance > this.cairn.x && this.hugh.x < this.cairn.x+this.cairn.width)) {
                         this.hugh.color = 1;
@@ -77,7 +70,6 @@ class Forest extends Phaser.Scene {
                         this.hugh.color = 1;
                     }
                 }
-                console.log("hugh color is ", this.hugh.color);
                 if (this.hugh.color == 1) {
                     this.hugh.play('idle');
                 }
@@ -95,7 +87,7 @@ class Forest extends Phaser.Scene {
             this.mist.tilePositionX += 1;
 
             if(this.hugh.x+this.hugh.width >= game.config.width){
-                this.scene.start('crevice');
+                this.scene.start('textTransition');
             }
         }
 
