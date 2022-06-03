@@ -54,6 +54,7 @@ class Crevice extends Phaser.Scene {
         this.cairn.setScale(1.2);
 
         this.hugh = new Player(this, 20, 0, 'hugh').setOrigin(0,0);
+        this.hugh.camo = false;
         this.strikeDistance = 40;
         this.grayCollider = this.physics.add.collider(this.hugh, this.grayPlatform1);
         this.blackCollider = this.physics.add.collider(this.hugh, this.blackPlatform1);
@@ -84,6 +85,8 @@ class Crevice extends Phaser.Scene {
         this.beam1.alpha = 0;
         this.beam2.alpha = 0;
         this.beam3.alpha = 0;
+
+    
         
     }
 
@@ -93,7 +96,35 @@ class Crevice extends Phaser.Scene {
         if (this.frameTime > 16.5) {
             this.frameTime = 0;
 
+
+            //if(this.hugh.y > 180 && this.hugh.y < 210 && this.beam1.alpha == 1){
+            //    this.hugh.die();
+            //}
+
+
             this.eye1.update(this.hugh);
+
+            //console.log(this.eye1.frame.name);
+            if(this.eye1.frame.name == 0){
+                this.beam1.alpha = 1;
+            }else{
+                //console.log(this.eye1.frame);
+                this.beam1.alpha = 0;
+            }
+
+            if(this.eye2.frame.name == 0){
+                this.beam2.alpha = 1;
+            }else{
+                //console.log(this.eye1.frame);
+                this.beam2.alpha = 0;
+            }
+
+            if(this.eye3.frame.name == 0){
+                this.beam3.alpha = 1;
+            }else{
+                //console.log(this.eye1.frame);
+                this.beam3.alpha = 0;
+            }
             
             //update code here
             //this.mist.tilePositionX += 1;
