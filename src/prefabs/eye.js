@@ -6,6 +6,7 @@ class Eye extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         this.spottedDuration = 0;
         this.maxSpotted = 20;
+        this.eyeStatus = -1;
         this.anims.create({
             key: 'blink',
             frames: this.anims.generateFrameNumbers('sideeyeBlink', { start: 0, end: 4, }),
@@ -19,10 +20,22 @@ class Eye extends Phaser.GameObjects.Sprite {
             frameRate: 7
         })
         this.anims.create({
-            key: 'open',
+            key: 'stayopen',
             frames: this.anims.generateFrameNumbers('sideeyeBlink', { start: 0, end: 0, }),
             repeat: -1,
             frameRate: 7
+        })
+        this.anims.create({
+            key: 'open',
+            frames: this.anims.generateFrameNumbers('sideeyeBlink', { start: 4, end: 0, }),
+            repeat: 0,
+            frameRate: 9
+        })
+        this.anims.create({
+            key: 'close',
+            frames: this.anims.generateFrameNumbers('sideeyeBlink', { start: 0, end: 4, }),
+            repeat: 0,
+            frameRate: 5
         })
     }
 
@@ -39,8 +52,17 @@ class Eye extends Phaser.GameObjects.Sprite {
     }
 
     blink() {
+        this.eyeStatus *= -1;
+        if(this.eyeStatus == 1){
+            this.play("open");
+        }else{
+            this.play("close");
+        }
         console.log("blink from ", this.texture.key);
-        this.play("blink");
+        //this.play("open");
+        //this.on('animationcomplete', () => {
+        //    this.play("close");
+        //});
         this.scene.time.delayedCall(this.blinkInterval, () => {
             this.blink();
         })

@@ -68,12 +68,12 @@ class Crevice extends Phaser.Scene {
 
         this.eye1 = new Eye(this,180, 180, 'sideeyeBlink', 4).setOrigin(0,0);
         this.eye1.flipX = true;
-        this.eye1.create(100, 5000);
+        this.eye1.create(1000, 3000);
         this.eye2 = new Eye(this, game.config.width-130, 380, 'sideeyeBlink', 4).setOrigin(0,0);
-        //this.eye2.create(1000, 2000);
+        this.eye2.create(2000, 3000);
         this.eye3 = new Eye(this,40, 580, 'sideeyeBlink', 4).setOrigin(0,0);
         this.eye3.flipX = true;
-        //this.eye3.create(1000, 2000);
+        this.eye3.create(3000, 3000);
         
         this.beam1 = this.add.sprite(170+this.eye1.width, 180, "sideeyebeam").setOrigin(0,0);
         this.beam1.flipX = true;
