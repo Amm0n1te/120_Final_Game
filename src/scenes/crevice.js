@@ -103,6 +103,9 @@ class Crevice extends Phaser.Scene {
 
 
             this.eye1.update(this.hugh);
+            this.eye2.update(this.hugh);
+            this.eye3.update(this.hugh);
+            
 
             //console.log(this.eye1.frame.name);
             if(this.eye1.frame.name == 0){

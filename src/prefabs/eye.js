@@ -58,7 +58,7 @@ class Eye extends Phaser.GameObjects.Sprite {
         }else{
             this.play("close");
         }
-        console.log("blink from ", this.texture.key);
+        //console.log("blink from ", this.texture.key);
         //this.play("open");
         //this.on('animationcomplete', () => {
         //    this.play("close");
@@ -71,23 +71,15 @@ class Eye extends Phaser.GameObjects.Sprite {
 
     update(Player) {
         //eye collision
-        /*if(((Player.x > this.x && Player.x < this.x + this.width) || //checking x collision
-        (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width)) &&  //checking x collision
-          ((Player.y > this.y && Player.y < this.y+this.height) ||  //checking y collision
-            (Player.y+Player.height > this.y && Player.y+Player.height < this.y+this.height))) {
+        if(((Player.x > this.x && Player.x < this.x + this.width) || //checking x collision
+        (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width)) 
+        && ((Player.y > this.y-this.height && Player.y < this.y+this.height))) {
 
-            console.log("eye collision detected");
-        }*/
-        //console.log(Player.y, " and this y: ", this.y);
-        
-        if(((Player.y > this.y && Player.y < this.y+this.height) ||  //checking y collision
-        (Player.y+Player.height > this.y && Player.y+Player.height < this.y+this.height))) {
-
-            console.log("eye collision detected");
+            console.log("eye collision")
+            Player.die()
         }
 
         this.checkSight(Player);
-        //console.log(this.texture.key);
     }
 
     checkSight(Player) {
