@@ -47,6 +47,12 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('ledge', 'assets/ledge.png');
         this.load.image('creviceBG', 'assets/creviceBG.png');
 
+        //text transitions
+        this.load.spritesheet('level1text', 'assets/level1Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});
+        this.load.spritesheet('level2text', 'assets/level2Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});
+        this.load.spritesheet('level3text', 'assets/level3Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});
+        //this.load.spritesheet('level4text', 'assets/level4Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});
+
     }
 
     create(){
@@ -58,7 +64,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        this.scene.start('crevice');
+        //this.scene.start('crevice');
 
         //finished is a variable that keeps track of whether or not the player has played through the game once already.
         //we don't want to show the controls to a player who has already beaten the game.
