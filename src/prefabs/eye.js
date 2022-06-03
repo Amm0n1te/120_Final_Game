@@ -71,13 +71,7 @@ class Eye extends Phaser.GameObjects.Sprite {
 
     update(Player) {
         //eye collision
-        if(((Player.x > this.x && Player.x < this.x + this.width) || //checking x collision
-        (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width)) 
-        && ((Player.y > this.y-this.height && Player.y < this.y+this.height))) {
 
-            console.log("eye collision")
-            Player.die()
-        }
 
         this.checkSight(Player);
     }
@@ -93,9 +87,14 @@ class Eye extends Phaser.GameObjects.Sprite {
             } else this.spottedDuration = 0;
         }
         else if (this.texture.key == 'sideeye' || this.texture.key == 'sideeyeBlink') {
-            if (this.start) {
-                //check collision for y axis eye
-            }
+            if(((Player.x > this.x && Player.x < this.x + this.width) || //checking x collision
+            (Player.x+Player.width > this.x && Player.x+Player.width < this.x+this.width)) 
+            && ((Player.y > this.y-this.height && Player.y < this.y+this.height))) {
+                this.spottedDuration++;
+                if (this.spottedDuration == this.maxSpotted){
+                    Player.die();
+                } 
+            }else this.spottedDuration = 0;
         }
     }
 
