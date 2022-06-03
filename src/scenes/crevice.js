@@ -66,14 +66,25 @@ class Crevice extends Phaser.Scene {
         this.bottomGround.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.bottomGround);
 
-        this.eye1 = new Eye(this,180, 180, 'sideeye').setOrigin(0,0);
+        this.eye1 = new Eye(this,180, 180, 'sideeyeBlink', 4).setOrigin(0,0);
         this.eye1.flipX = true;
-        this.eye1.create();
-        this.eye2 = new Eye(this, game.config.width-130, 380, 'sideeye').setOrigin(0,0);
-        this.eye2.create();
-        this.eye3 = new Eye(this,40, 580, 'sideeye').setOrigin(0,0);
+        this.eye1.create(100, 5000);
+        this.eye2 = new Eye(this, game.config.width-130, 380, 'sideeyeBlink', 4).setOrigin(0,0);
+        //this.eye2.create(1000, 2000);
+        this.eye3 = new Eye(this,40, 580, 'sideeyeBlink', 4).setOrigin(0,0);
         this.eye3.flipX = true;
-        this.eye3.create();
+        //this.eye3.create(1000, 2000);
+        
+        this.beam1 = this.add.sprite(170+this.eye1.width, 180, "sideeyebeam").setOrigin(0,0);
+        this.beam1.flipX = true;
+        this.beam2 = this.add.sprite(110-this.eye2.width, 380, "sideeyebeam").setOrigin(0,0);
+        this.beam3 = this.add.sprite(34+this.eye3.width, 580, "sideeyebeam").setOrigin(0,0);
+        this.beam3.flipX = true;
+
+        this.beam1.alpha = 0;
+        this.beam2.alpha = 0;
+        this.beam3.alpha = 0;
+        
     }
 
 

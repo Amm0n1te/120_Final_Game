@@ -26,10 +26,24 @@ class Eye extends Phaser.GameObjects.Sprite {
         })
     }
 
-    create() {
+    //use only with side facing eye
+    create(startDelay, blinkInterval) {
         if (this.texture.key == 'sideeye'){
             this.play('closed');
         } 
+        this.startDelay = startDelay;
+        this.blinkInterval = blinkInterval;
+        this.scene.time.delayedCall(startDelay, () => {
+            this.blink();
+        }, null, this.scene);
+    }
+
+    blink() {
+        console.log("blink from ", this.texture.key);
+        this.play("blink");
+        this.scene.time.delayedCall(this.blinkInterval, () => {
+            this.blink();
+        })
     }
 
 
@@ -48,9 +62,10 @@ class Eye extends Phaser.GameObjects.Sprite {
                 } 
             } else this.spottedDuration = 0;
         }
-        else if (this.texture.key == 'sideeye') {
-            //check collision for y axis eye
-            //console.log("SDLFKIJSDFOI");
+        else if (this.texture.key == 'sideeye' || this.texture.key == 'sideeyeBlink') {
+            if (this.start) {
+                //check collision for y axis eye
+            }
         }
     }
 
