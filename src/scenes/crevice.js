@@ -54,7 +54,6 @@ class Crevice extends Phaser.Scene {
         this.cairn.setScale(1.2);
 
         this.hugh = new Player(this, 20, 0, 'hugh').setOrigin(0,0);
-        this.hugh.camo = false;
         this.strikeDistance = 40;
         this.grayCollider = this.physics.add.collider(this.hugh, this.grayPlatform1);
         this.blackCollider = this.physics.add.collider(this.hugh, this.blackPlatform1);
@@ -107,14 +106,16 @@ class Crevice extends Phaser.Scene {
             this.eye3.update(this.hugh);
             
 
-            //console.log(this.eye1.frame.name);
+            console.log(this.hugh.camo);
             if(this.eye1.frame.name == 0){
                 this.beam1.alpha = 1;
                 this.hugh.camo = false;
             }else{
                 //console.log(this.eye1.frame);
                 this.beam1.alpha = 0;
+                this.hugh.camo = true;
             }
+            this.checkBeam(this.hugh, this.beam1);
 
             if(this.eye2.frame.name == 0){
                 this.beam2.alpha = 1;
@@ -122,7 +123,9 @@ class Crevice extends Phaser.Scene {
             }else{
                 //console.log(this.eye1.frame);
                 this.beam2.alpha = 0;
+                this.hugh.camo = true;
             }
+            this.checkBeam(this.hugh, this.beam2);
 
             if(this.eye3.frame.name == 0){
                 this.beam3.alpha = 1;
@@ -130,10 +133,10 @@ class Crevice extends Phaser.Scene {
             }else{
                 //console.log(this.eye1.frame);
                 this.beam3.alpha = 0;
+                this.hugh.camo = true;
             }
+            this.checkBeam(this.hugh, this.beam3);
             
-            //update code here
-            //this.mist.tilePositionX += 1;
             
             //hugh shrine hit checking
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {
@@ -186,4 +189,10 @@ class Crevice extends Phaser.Scene {
 
         }//frametime bracket
     }//update bracket
+
+    checkBeam(hugh, beam){
+        if(!hugh.dying && ((hugh.y > beam.y-beam.height && hugh.y < beam.y+beam.height)) && beam.alpha == 1){
+            hugh.die();
+        }
+    }
 }

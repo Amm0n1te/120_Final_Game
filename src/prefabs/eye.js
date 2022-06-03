@@ -96,12 +96,7 @@ class Eye extends Phaser.GameObjects.Sprite {
                 } 
             }else this.spottedDuration = 0;
 
-            if(Player.camo == false && ((Player.y > this.y-this.height && Player.y < this.y+this.height))){
-                this.spottedDuration++;
-                if (this.spottedDuration == this.maxSpotted){
-                    Player.die();
-                } 
-            }else this.spottedDuration = 0;
+
         }
     }
 
