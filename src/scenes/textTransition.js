@@ -28,6 +28,13 @@ class TextTransition extends Phaser.Scene {
             this.creviceText = this.add.sprite(0,0, 'crazy_cat').setOrigin(0, 0);
 
             console.log("textTransition ", nextScene);
+            nextScene = "ending";
+        } 
+        else if (this.nextScene == "ending") {
+            //display lore text for crevice scene
+            this.creviceText = this.add.sprite(0,0, 'crazy_cat').setOrigin(0, 0);
+
+            console.log("textTransition ", nextScene);
             nextScene = "play";
         }
     }

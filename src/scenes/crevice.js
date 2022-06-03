@@ -143,6 +143,10 @@ class Crevice extends Phaser.Scene {
 
             this.hugh.update();
 
+            if(this.hugh.x+this.hugh.width >= game.config.width && this.hugh.y > this.blackPlatform1.y){
+                this.scene.start('textTransition');
+            }
+
         }//frametime bracket
     }//update bracket
 }
