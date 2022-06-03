@@ -5,8 +5,9 @@ class Crevice extends Phaser.Scene {
 
 
     create() {
-        this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
-        this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
+        this.add.sprite(0, 0, 'creviceBG').setOrigin(0, 0);
+        //this.background = this.add.tileSprite(0,0, 960, 720, 'creviceBG').setOrigin(0, 0);
+        //this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
         this.frameTime = 0;
         this.physics.world.gravity.y = 2000;
         this.MAX_VELOCITY = 300;
@@ -47,9 +48,9 @@ class Crevice extends Phaser.Scene {
         this.grayPlatform1.body.immovable = true;
         this.grayPlatform1.body.allowGravity = false;
 
-        this.shrine = this.add.sprite(450, 250, 'shrine').setOrigin(0, 0);
+        this.shrine = this.add.sprite(550, 250, 'shrine').setOrigin(0, 0);
         this.shrine.setScale(1.2);
-        this.cairn = this.add.sprite(450, 470, 'cairn').setOrigin(0, 0);
+        this.cairn = this.add.sprite(350, 470, 'cairn').setOrigin(0, 0);
         this.cairn.setScale(1.2);
 
         this.hugh = new Player(this, 20, 0, 'hugh').setOrigin(0,0);
@@ -57,12 +58,22 @@ class Crevice extends Phaser.Scene {
         this.grayCollider = this.physics.add.collider(this.hugh, this.grayPlatform1);
         this.blackCollider = this.physics.add.collider(this.hugh, this.blackPlatform1);
         this.physics.add.collider(this.hugh, this.ledge);
+        this.door = this.add.sprite(game.config.width, 430, 'door').setOrigin(1, 0);
 
         this.groundground = this.add.sprite(game.config.width/2, 757, 'floor');
         this.bottomGround = this.physics.add.sprite(game.config.width/2, 780, 'floor');
         this.bottomGround.body.immovable = true;
         this.bottomGround.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.bottomGround);
+
+        this.eye1 = new Eye(this,180, 180, 'sideeye').setOrigin(0,0);
+        this.eye1.flipX = true;
+        this.eye1.create();
+        this.eye2 = new Eye(this, game.config.width-130, 380, 'sideeye').setOrigin(0,0);
+        this.eye2.create();
+        this.eye3 = new Eye(this,40, 580, 'sideeye').setOrigin(0,0);
+        this.eye3.flipX = true;
+        this.eye3.create();
     }
 
 
@@ -70,9 +81,11 @@ class Crevice extends Phaser.Scene {
         this.frameTime += delta;
         if (this.frameTime > 16.5) {
             this.frameTime = 0;
+
+            this.eye1.update(this.hugh);
             
             //update code here
-            this.mist.tilePositionX += 1;
+            //this.mist.tilePositionX += 1;
             
             //hugh shrine hit checking
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown) {

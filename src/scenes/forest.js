@@ -3,6 +3,10 @@ class Forest extends Phaser.Scene {
         super('forest');
     }
 
+    preload(){
+
+    }
+
     create() {
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
@@ -34,6 +38,8 @@ class Forest extends Phaser.Scene {
         this.strikeDistance = 40;
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
         this.eye.maxSpotted = 10;
+        this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
+        
         this.frontGround = this.add.sprite(game.config.width/2, 610, 'floor');
         this.bottomGround = this.physics.add.sprite(game.config.width/2, 640, 'floor');
         this.bottomGround.body.immovable = true;

@@ -7,7 +7,9 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     preload() {
         //title stuff
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
-        this.load.image('keysImage', 'assets/keysPlaceholder.png');
+        this.load.image('keysImage', 'assets/controls.png');
+        this.load.image('crazy_cat', 'assets/crazy_cat_3.png');
+
 
         //level 1
         this.load.spritesheet('hughWalkSheet', 'assets/hughWalkSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 4});
@@ -35,13 +37,16 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
         this.load.image('rightHandGray', 'assets/rightHandGray.png');
         this.load.image('leftHand', 'assets/leftHand.png');
         this.load.image('leftHandGray', 'assets/leftHandGray.png');
-
+        
         //level 3
         this.load.spritesheet('blackPlatform', 'assets/shadowPlatformSheet.png', {frameWidth: 700, frameHeight: 28, startFrame: 0, endFrame: 2});
         this.load.spritesheet('moonPlatform', 'assets/moonPlatformSheet.png', {frameWidth: 700, frameHeight: 28, startFrame: 0, endFrame: 2});
         this.load.image('sideeye', 'assets/sideeye.png');
-        this.load.image('sideeye', 'assets/sideeyebeam.png');
+        this.load.image('sideeyebeam', 'assets/sideeyebeam.png');
+        this.load.spritesheet('sideeyeBlink', 'assets/sideeyeBlink.png', {frameWidth: 120, frameHeight: 120, startFrame: 0, endFrame: 7})
         this.load.image('ledge', 'assets/ledge.png');
+        this.load.image('creviceBG', 'assets/creviceBG.png');
+
     }
 
     create(){
@@ -53,7 +58,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        //this.scene.start('textTransition');
+        this.scene.start('crevice');
 
         //finished is a variable that keeps track of whether or not the player has played through the game once already.
         //we don't want to show the controls to a player who has already beaten the game.
@@ -64,10 +69,10 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
                 this.showKeys = true;
             }
             if (this.showKeys == true) {
-                if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('textTransition');
+                if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('play');
             }
         } else if (finished) {
-            if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('textTransition');
+            if (Phaser.Input.Keyboard.JustDown(spacebar)) this.scene.start('play');
         }
     }
 }
