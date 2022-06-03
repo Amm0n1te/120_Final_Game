@@ -110,6 +110,7 @@ class Crevice extends Phaser.Scene {
             //console.log(this.eye1.frame.name);
             if(this.eye1.frame.name == 0){
                 this.beam1.alpha = 1;
+                this.hugh.camo = false;
             }else{
                 //console.log(this.eye1.frame);
                 this.beam1.alpha = 0;
@@ -117,6 +118,7 @@ class Crevice extends Phaser.Scene {
 
             if(this.eye2.frame.name == 0){
                 this.beam2.alpha = 1;
+                this.hugh.camo = false;
             }else{
                 //console.log(this.eye1.frame);
                 this.beam2.alpha = 0;
@@ -124,6 +126,7 @@ class Crevice extends Phaser.Scene {
 
             if(this.eye3.frame.name == 0){
                 this.beam3.alpha = 1;
+                this.hugh.camo = false;
             }else{
                 //console.log(this.eye1.frame);
                 this.beam3.alpha = 0;
