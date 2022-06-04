@@ -26,6 +26,7 @@ class Loading extends Phaser.Scene {
         this.load.spritesheet('hughJumpGray', 'assets/hughJumpGray.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 9});
         this.load.spritesheet('hughHit', 'assets/hughHitSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 8});
         this.load.spritesheet('hughHitGray', 'assets/hughHitSheetGray.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 8});
+        this.load.audio('hitSound', 'assets/hugh_slash.mp3');
         this.load.spritesheet('hughDeath', 'assets/hughDeathSheet.png', {frameWidth:80, frameHeight: 130, startFrame: 0, endFrame: 22});
         this.load.audio('wind', 'assets/wind.wav');
         this.load.audio('death', 'assets/reverse_bubbling.mp3');

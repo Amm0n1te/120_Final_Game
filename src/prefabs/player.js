@@ -11,6 +11,7 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: -1,
         });
         this.deathSound = this.scene.sound.add('death', {volume: 0.3});
+        this.hitSound = this.scene.sound.add('hitSound', {volume: 0.5});
         scene.physics.add.existing(this);
         this.speed = 6;
         this.color = 1;  //1 is black, -1 is gray
@@ -146,6 +147,7 @@ class Player extends Phaser.GameObjects.Sprite {
         //I resort to using a bool to make it trigger once for each button press.
         if (spacebar.isDown && !keyLEFT.isDown && !keyRIGHT.isDown && this.spacebools == false && !this.dying && this.body.touching.down) {
             this.spacebools = true;
+            this.hitSound.play();
             if (this.color == 1) { //1 is black
                 this.play('hughHit');
             }
