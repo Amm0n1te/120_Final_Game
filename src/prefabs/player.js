@@ -10,6 +10,7 @@ class Player extends Phaser.GameObjects.Sprite {
             yoyo: true,
             repeat: -1,
         });
+        this.deathSound = this.scene.sound.add('death', {volume: 0.3});
         scene.physics.add.existing(this);
         this.speed = 6;
         this.color = 1;  //1 is black, -1 is gray
@@ -164,6 +165,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.scene.input.keyboard.enabled = false;
         //this.stop('idle');
         this.play('hughDeath');
+        this.deathSound.play();
         this.on('animationcomplete', () => {
             //this.time.delayedCall(500, () => { 
                 //this.playMusic.stop();

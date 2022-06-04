@@ -1,10 +1,18 @@
 class Loading extends Phaser.Scene {
     preload() {
+
+        this.progress = 0;
+
+        this.load.on('progress', function (value) {
+            this.progress = value;
+        });
+        this.add.text(game.config.width/2, game.config.height/2, this.progress).setOrigin(0.5,0.5);
+                    
         //title stuff
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
         this.load.image('keysImage', 'assets/controls.png');
-        this.load.image('crazy_cat', 'assets/crazy_cat_3.png');
         this.load.image('space', 'assets/space.png');
+        this.load.image('crazy_cat', 'assets/crazy_cat_3.png');
 
 
         //level 1
@@ -20,6 +28,7 @@ class Loading extends Phaser.Scene {
         this.load.spritesheet('hughHitGray', 'assets/hughHitSheetGray.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 8});
         this.load.spritesheet('hughDeath', 'assets/hughDeathSheet.png', {frameWidth:80, frameHeight: 130, startFrame: 0, endFrame: 22});
         this.load.audio('wind', 'assets/wind.wav');
+        this.load.audio('death', 'assets/reverse_bubbling.mp3');
         this.load.image('floor', 'assets/ground.png');
         this.load.image('hands', 'assets/hands1.png');
         this.load.image('mist', 'assets/mist.png');
@@ -54,6 +63,10 @@ class Loading extends Phaser.Scene {
     create() {
         console.log("done loading");
         this.scene.start('title');
+    }
+
+    update(){
+        
     }
 
 }

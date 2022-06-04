@@ -14,6 +14,7 @@ class Play extends Phaser.Scene {
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.wind = this.sound.add('wind', {volume: 1.5});
         this.wind.play({loop: true});
+        
 
         this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
         this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
