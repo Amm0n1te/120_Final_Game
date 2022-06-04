@@ -8,9 +8,6 @@ class Play extends Phaser.Scene {
         this.handEyeOffset = 30;
         this.MAX_VELOCITY = 300;
         this.physics.world.gravity.y = 2000;
-        //keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-        //keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        //keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -23,7 +20,22 @@ class Play extends Phaser.Scene {
         this.hands = this.add.sprite(0, 0, 'hands').setOrigin(0, 0);
         this.shrine = this.add.sprite(460, 500, 'shrine').setOrigin(0, 0);
         this.shrine.setScale(1.2);
-        //this.cairn.name = 'cairn';
+        this.shrine.anims.create({
+            key: 'shrineAnim',
+            frames: this.anims.generateFrameNumbers('shrine', { start: 0, end: 8, }),
+            repeat: -1,
+            frameRate: 6
+        })
+
+        this.tweens.add({
+            targets: this.shrine,
+            y: { value: this.shrine.y + 5, duration: 900, ease: "Sine.easeInOut"},
+            yoyo: true,
+            loop: -1
+        })
+
+
+        this.shrine.play('shrineAnim');
         this.hugh = new Player(this, 88, 445, 'hugh', 0).setOrigin(0,0);
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
         this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
@@ -39,6 +51,8 @@ class Play extends Phaser.Scene {
 
         this.frameTime = 0;
         this.strikeDistance = 40;
+
+        
     }//bootyassbuttballspeenischeekspoopoopeepeecacadoodoosheissekusocoulemerdemierdacolanaalgasarschloechleanusnostaobojken
 
     update(time, delta) {

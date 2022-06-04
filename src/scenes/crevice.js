@@ -50,8 +50,30 @@ class Crevice extends Phaser.Scene {
 
         this.shrine = this.add.sprite(550, 250, 'shrine').setOrigin(0, 0);
         this.shrine.setScale(1.2);
+        this.shrine.anims.create({
+            key: 'shrineAnim',
+            frames: this.anims.generateFrameNumbers('shrine', { start: 0, end: 8, }),
+            repeat: -1,
+            frameRate: 6
+        })
+        this.shrine.play('shrineAnim');
+
+        this.tweens.add({
+            targets: this.shrine,
+            y: { value: this.shrine.y + 5, duration: 900, ease: "Sine.easeInOut"},
+            yoyo: true,
+            loop: -1
+        })
+        
         this.cairn = this.add.sprite(350, 470, 'cairn').setOrigin(0, 0);
         this.cairn.setScale(1.2);
+        this.cairn.anims.create({
+            key: 'cairnAnim',
+            frames: this.anims.generateFrameNumbers('cairn', { start: 0, end: 8, }),
+            repeat: -1,
+            frameRate: 6
+        })
+        this.cairn.play('cairnAnim');
 
         this.hugh = new Player(this, 20, 0, 'hugh').setOrigin(0,0);
         this.strikeDistance = 40;
