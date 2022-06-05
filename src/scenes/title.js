@@ -28,7 +28,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        //this.scene.start('canyon');
+        this.scene.start('canyon');
         /*this.time.delayedCall(6000, () => {
             this.spaceImage.alpha = 1;
         }, null, this);*/

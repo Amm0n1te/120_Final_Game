@@ -31,22 +31,37 @@ class Canyon extends Phaser.Scene {
         this.bottomGround.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.bottomGround);
 
+        //ledges
+        this.ledge1 = this.physics.add.sprite(1.2*game.config.width/5, 550, "ledge").setOrigin(0,0);
+        this.ledge1.body.immovable = true;
+        this.ledge1.body.allowGravity = false;
+        this.physics.add.collider(this.hugh, this.ledge1);
+        this.ledge2 = this.physics.add.sprite(3*game.config.width/5, 380, "ledge").setOrigin(0,0);
+        this.ledge2.flipX = true;
+        this.ledge2.body.immovable = true;
+        this.ledge2.body.allowGravity = false;
+        this.physics.add.collider(this.hugh, this.ledge2);
+        this.ledge3 = this.physics.add.sprite(1.2*game.config.width/5, 200, "ledge").setOrigin(0,0);
+        this.ledge3.body.immovable = true;
+        this.ledge3.body.allowGravity = false;
+        this.physics.add.collider(this.hugh, this.ledge3);
+
+        
+        this.door = this.add.sprite(game.config.width, -30, 'door').setOrigin(1, 0);
+
         //canyon walls
-        this.leftWallVisual = this.add.sprite(game.config.width/5, game.config.height/2, 'wall');
-        this.rightWallVisual = this.add.sprite(4*game.config.width/5, game.config.height/2, 'wall');
-        this.rightWallVisual.flipX = true;
-        this.leftWallBound = this.physics.add.sprite(game.config.width/5-10, game.config.height/2+700, 'wall');
+        this.leftWallVisual = this.add.sprite(0.9*game.config.width/6, game.config.height/2, 'wall');
+        this.rightWallVisual = this.add.sprite(6.4*game.config.width/6, 2.7*game.config.height/4, 'wall2');
+        this.leftWallBound = this.physics.add.sprite(game.config.width/6-10, game.config.height/2, 'wall');
         this.leftWallBound.body.immovable = true;
         this.leftWallBound.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.leftWallBound);
         this.leftWallBound.body.checkCollision.right = true;
-        this.rightWallBound = this.physics.add.sprite(4*game.config.width/5+10, game.config.height/2-300, 'wall');
+        this.rightWallBound = this.physics.add.sprite(5.1*game.config.width/6+10, 2.6*game.config.height/4, 'wall2');
         this.rightWallBound.body.immovable = true;
         this.rightWallBound.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.rightWallBound);
         this.rightWallBound.body.checkCollision.left = true;
-        this.rightWallBound.flipX = true;
-
         
 
         this.frameTime = 0;
