@@ -21,8 +21,7 @@ class Canyon extends Phaser.Scene {
         this.hugh.body.checkCollision.right = true;
         
         
-        this.shrine = this.add.sprite(460, 500, 'shrine').setOrigin(0, 0);
-        this.shrine.setScale(1.2);
+
 
         //ground
         this.groundground = this.add.sprite(game.config.width/2, 757, 'floor');
@@ -31,26 +30,53 @@ class Canyon extends Phaser.Scene {
         this.bottomGround.body.allowGravity = false;
         this.physics.add.collider(this.hugh, this.bottomGround);
 
+        //shrines and cairn
+        this.anims.create({
+            key: 'shrineAnim',
+            frames: this.anims.generateFrameNumbers('shrine', { start: 0, end: 8, }),
+            repeat: -1,
+            frameRate: 6
+        })
+        this.shrine1 = this.add.sprite(360, 480, 'shrine').setOrigin(0, 0);
+        this.shrine1.setScale(1.2);
+        this.shrine1.play('shrineAnim');
+        this.shrine2 = this.add.sprite(330, 135, 'shrine').setOrigin(0, 0);
+        this.shrine2.setScale(1.2);
+        this.shrine2.play('shrineAnim');
+        this.cairn = this.add.sprite(580, 320, 'cairn').setOrigin(0, 0);
+        this.cairn.setScale(1.2);
+        this.anims.create({
+            key: 'cairnAnim',
+            frames: this.anims.generateFrameNumbers('cairn', { start: 0, end: 8, }),
+            repeat: -1,
+            frameRate: 6
+        })
+        this.cairn.play('cairnAnim');
+
+
         //ledges
-        this.ledge1 = this.physics.add.sprite(1.2*game.config.width/5, 550, "ledge").setOrigin(0,0);
-        this.ledge1.body.immovable = true;
-        this.ledge1.body.allowGravity = false;
-        this.physics.add.collider(this.hugh, this.ledge1);
-        this.ledge2 = this.physics.add.sprite(3*game.config.width/5, 380, "ledge").setOrigin(0,0);
+        this.ledge1 = this.add.sprite(1.2*game.config.width/5, 550, "ledge").setOrigin(0,0);
+        this.ledge1Collider = this.physics.add.sprite(1.2*game.config.width/5, 555, "ledgeCollider").setOrigin(0,0);
+        this.ledge1Collider.body.immovable = true;
+        this.ledge1Collider.body.allowGravity = false;
+        this.physics.add.collider(this.hugh, this.ledge1Collider);
+        this.ledge2 = this.add.sprite(3*game.config.width/5, 380, "ledge").setOrigin(0,0);
         this.ledge2.flipX = true;
-        this.ledge2.body.immovable = true;
-        this.ledge2.body.allowGravity = false;
-        this.physics.add.collider(this.hugh, this.ledge2);
-        this.ledge3 = this.physics.add.sprite(1.2*game.config.width/5, 200, "ledge").setOrigin(0,0);
-        this.ledge3.body.immovable = true;
-        this.ledge3.body.allowGravity = false;
-        this.physics.add.collider(this.hugh, this.ledge3);
+        this.ledge2Collider = this.physics.add.sprite(3*game.config.width/5, 385, "ledgeCollider").setOrigin(0,0);
+        this.ledge2Collider.body.immovable = true;
+        this.ledge2Collider.body.allowGravity = false;
+        this.physics.add.collider(this.hugh, this.ledge2Collider);
+        this.ledge3 = this.add.sprite(1.2*game.config.width/5, 200, "ledge").setOrigin(0,0);
+        this.ledge3Collider = this.physics.add.sprite(1.2*game.config.width/5, 205, "ledgeCollider").setOrigin(0,0);
+        this.ledge3Collider.body.immovable = true;
+        this.ledge3Collider.body.allowGravity = false;
+        this.physics.add.collider(this.hugh, this.ledge3Collider);
 
         
-        this.door = this.add.sprite(game.config.width, -30, 'door').setOrigin(1, 0);
+        this.door = this.add.sprite(game.config.width+50, -220, 'door').setOrigin(1, 0);
 
         //canyon walls
-        this.leftWallVisual = this.add.sprite(0.9*game.config.width/6, game.config.height/2, 'wall');
+        this.leftWallVisual = this.add.sprite(1.2*game.config.width/6, game.config.height/2, 'wall');
         this.rightWallVisual = this.add.sprite(6.4*game.config.width/6, 2.7*game.config.height/4, 'wall2');
         this.leftWallBound = this.physics.add.sprite(game.config.width/6-10, game.config.height/2, 'wall');
         this.leftWallBound.body.immovable = true;
@@ -72,30 +98,14 @@ class Canyon extends Phaser.Scene {
         if (this.frameTime > 16.5) {
             this.frameTime = 0;
 
+            //console.log(this.hugh.y+this.hugh.height, " >= ", this.ledge1Collider.y)
+            
             //hugh input checking
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown && this.hugh.body.touching.down) {
-                console.log(this.hugh.color)
-                if (this.hugh.flipX == false) { //check if he hit something when he's facing right
-                    if ((this.hugh.x+this.hugh.width+this.hugh.strikeDistance > this.shrine.x && this.hugh.x < this.shrine.x+this.shrine.width)) {
-                        console.log("ending triggered");
-                        this.cat.alpha = 1;
-                        finished = true;
-                        this.time.delayedCall(4000, () => {
-                            this.scene.start("title");
-                        }, null, this);
-                    }
-                }
-                else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
-                    if ((this.hugh.x-this.strikeDistance < this.shrine.x+this.shrine.width && this.hugh.x > this.shrine.x)) {
-                        console.log("ending triggered");
-                        this.cat.alpha = 1;
-                        finished = true;
-                        this.time.delayedCall(4000, () => {
-                            this.scene.start("title");
-                        }, null, this);
-                    }
-                }
-                console.log("hugh color is ", this.hugh.color);
+               if (this.hugh.y+this.hugh.height > this.ledge2Collider.y) {this.checkHit(this.shrine1)}
+               else if (this.hugh.y+this.hugh.height > this.ledge3Collider.y) {this.checkHit(this.cairn)}
+               else {this.checkHit(this.shrine2)}
+
                 if (this.hugh.color == 1) {
                     this.hugh.play('idle');
                 }
@@ -106,8 +116,30 @@ class Canyon extends Phaser.Scene {
 
             this.hugh.update();
             this.mist.tilePositionX += 1;
+            if (this.hugh.y >= this.rightWallBound.y-this.rightWallBound.height && this.hugh.x+this.hugh.width >= game.config.width) {
+                this.scene.start("ending");
+            }
 
         }
     }
+
+    checkHit(object) {
+        if (this.hugh.flipX == false) { //check if he hit something when he's facing right
+            if ((this.hugh.x+this.hugh.width+this.hugh.strikeDistance > object.x && this.hugh.x < object.x)) {
+                if (object.texture.key == 'shrine') this.hugh.color = -1;
+                else this.hugh.color = 1;
+            }
+        }
+        else if (this.hugh.flipX == true) { //check if he hit something when he's facing left
+            if ((this.hugh.x-this.hugh.strikeDistance < object.x+object.width && this.hugh.x+this.hugh.width > object.x)) {
+                if (object.texture.key == 'shrine') this.hugh.color = -1;
+                else this.hugh.color = 1;
+                
+            }
+        }
+    }
+
     
 }
+
+

@@ -44,7 +44,7 @@ class Loading extends Phaser.Scene {
         this.load.image('leftHand', 'assets/leftHand.png');
         this.load.image('leftHandGray', 'assets/leftHandGray.png');
 
-        //level 3
+        //level 3: Crevice
         this.load.spritesheet('blackPlatform', 'assets/shadowPlatformSheet.png', {frameWidth: 700, frameHeight: 28, startFrame: 0, endFrame: 2});
         this.load.spritesheet('moonPlatform', 'assets/moonPlatformSheet.png', {frameWidth: 700, frameHeight: 28, startFrame: 0, endFrame: 2});
         this.load.image('sideeye', 'assets/sideeye.png');
@@ -53,9 +53,10 @@ class Loading extends Phaser.Scene {
         this.load.image('ledge', 'assets/ledge.png');
         this.load.image('creviceBG', 'assets/creviceBG.png');
 
-        //level 4
+        //level 4: Canyon
         this.load.image('wall', 'assets/wall1.png');
         this.load.image('wall2', 'assets/wall2.png');
+        this.load.image('ledgeCollider', 'assets/ledgeCollider.png');
 
         //text transitions
         this.load.spritesheet('level1text', 'assets/level1Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});
@@ -66,7 +67,6 @@ class Loading extends Phaser.Scene {
     }
 
     create() {
-        console.log("done loading");
         this.scene.start('title');
     }
 
