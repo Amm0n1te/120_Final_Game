@@ -13,7 +13,7 @@ class Player extends Phaser.GameObjects.Sprite {
         this.deathSound = this.scene.sound.add('death', {volume: 0.3});
         this.hitSound = this.scene.sound.add('hitSound', {volume: 0.5});
         scene.physics.add.existing(this);
-        this.speed = 6;
+        this.speed = 260;
         this.color = 1;  //1 is black, -1 is gray
         this.camo = false;
         this.dying = false;
@@ -120,13 +120,14 @@ class Player extends Phaser.GameObjects.Sprite {
         //movement controls
         if (keyLEFT.isDown && this.x > 0 && this.dying == false) {
             this.flipX = true;
-            this.x -= this.speed;
+            this.body.setVelocityX(-this.speed);
         }
         else if (keyRIGHT.isDown && this.x < game.config.width-this.width && this.dying == false) {
             
             this.flipX = false;
-            this.x += this.speed;
+            this.body.setVelocityX(this.speed);
         }
+        if (!this.leftWalking && !this.rightWalking) this.body.setVelocityX(0);
 
         if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)&& this.dying == false) {
             this.body.setVelocityY(-900);
