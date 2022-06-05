@@ -39,6 +39,15 @@ class Play extends Phaser.Scene {
         this.shrine.play('shrineAnim');
         this.hugh = new Player(this, 88, 445, 'hugh', 0).setOrigin(0,0);
         this.eye = new Eye(this, 655, 11, 'eyeDown').setOrigin(0,0);
+
+        
+        this.tweens.add({
+            targets: this.eye,
+            y: { value: this.eye.y - 5, duration: 900, ease: "Sine.easeInOut"},
+            yoyo: true,
+            loop: -1
+        })
+
         this.door = this.add.sprite(game.config.width, 250, 'door').setOrigin(1, 0);
 
         

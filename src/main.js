@@ -7,14 +7,14 @@ let config = {
         default: 'arcade',
         fps: 60,
         arcade: {
-            debug: false,
+            debug: true,
             gravity: {
                 x: 0,
                 y: 0
             }
         }
     },
-    scene: [Loading, Title, TextTransition, Play, Forest, Crevice, Ending],
+    scene: [Loading, Title, TextTransition, Play, Forest, Crevice, Canyon, Ending],
 };
 
 let keyLEFT, keyRIGHT, keyUP, spacebar; 

@@ -53,6 +53,9 @@ class Loading extends Phaser.Scene {
         this.load.image('ledge', 'assets/ledge.png');
         this.load.image('creviceBG', 'assets/creviceBG.png');
 
+        //level 4
+        this.load.image('wall', 'assets/wall.png');
+
         //text transitions
         this.load.spritesheet('level1text', 'assets/level1Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});
         this.load.spritesheet('level2text', 'assets/level2Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});

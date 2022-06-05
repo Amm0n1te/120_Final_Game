@@ -57,7 +57,7 @@ class TextTransition extends Phaser.Scene {
             this.creviceText = this.add.sprite(0,0, 'level3text').setOrigin(0, 0);
             this.creviceText.play('creviceAnim').setOrigin(0,0);
             //this.crazycat = this.add.sprite(0,0, 'crazy_cat').setOrigin(0,0);
-            nextScene = "ending";
+            nextScene = "canyon";
         } 
         else if (nextScene == "ending") {
             //display lore text for ending scene
