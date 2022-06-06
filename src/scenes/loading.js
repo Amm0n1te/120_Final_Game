@@ -1,12 +1,5 @@
 class Loading extends Phaser.Scene {
     preload() {
-
-        this.progress = 0;
-
-        this.load.on('progress', function (value) {
-            this.progress = value;
-        });
-        this.add.text(game.config.width/2, game.config.height/2, this.progress).setOrigin(0.5,0.5);
                     
         //title stuff
         this.load.image('titleScreen', 'assets/placeholderTitle.png');
@@ -64,6 +57,13 @@ class Loading extends Phaser.Scene {
 
         //endings
         this.load.spritesheet('hughHandSheet', 'assets/hughHandSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 31});
+        this.load.spritesheet('haroldEyesSheet', 'assets/haroldEyesSheet.png', {frameWidth: 200, frameHeight: 150, startFrame: 0, endFrame: 21 });
+        this.load.image('haroldSit', 'assets/haroldSit.png');
+        this.load.image('haroldMuscle', 'assets/haroldMuscle.png');
+        this.load.image('haroldBlank', 'assets/haroldblank.png');
+        this.load.image('hughMuscle', 'assets/hughMuscle.png');
+        this.load.audio('lowMeow', 'assets/lowMeow.wav');
+        this.load.audio('fard', 'assets/fard.mp3');
 
         //text transitions
         this.load.spritesheet('level1text', 'assets/level1Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});

@@ -14,7 +14,7 @@ let config = {
             }
         }
     },
-    scene: [Loading, Title, TextTransition, Play, Forest, Crevice, Canyon, Ending, Ending2, Test],
+    scene: [Loading, Title, TextTransition, Play, Forest, Crevice, Canyon, Ending, Ending2, Test, Credits],
 };
 
 let keyLEFT, keyRIGHT, keyUP, spacebar; 

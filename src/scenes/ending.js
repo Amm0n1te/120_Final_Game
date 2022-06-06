@@ -19,10 +19,18 @@ class Ending extends Phaser.Scene {
 
         //
 
-        
+        this.meow = this.sound.add('lowMeow', {volume: 0.8});
+        this.fard = this.sound.add('fard');
         this.whiteRect = this.add.rectangle(0, 0, 960, 720, 0xFFFFFF).setOrigin(0, 0);
         this.blackRect = this.add.rectangle(0, 0, 960, 720, 0x000000).setOrigin(0, 0);
+        //this.blackRect.alpha = 0;
         this.hugh = new Player(this, 88, 445, 'hugh', 0).setOrigin(0,0);
+        this.hugh.anims.create({
+            key: 'haroldEyesMorph',
+            frames: this.anims.generateFrameNumbers('haroldEyesSheet', { start: 0, end: 21, }),
+            repeat: 0,
+            frameRate: 4,
+        })
 
         this.leftWallBound = this.physics.add.sprite(900, game.config.height/2, 'wall');
         this.leftWallBound.body.immovable = true;
@@ -42,8 +50,22 @@ class Ending extends Phaser.Scene {
         this.bottomGround = this.add.sprite(game.config.width/2, 730, 'floor');
 
         
+        this.harold = this.add.sprite(300, 466, 'haroldSit');//
+        this.harold.alpha = 0;
+        this.animTarget = this.add.sprite(215, 350, 'haroldBlank');
+        this.animTarget.anims.create({
+            key: 'haroldEyesMorph',
+            frames: this.anims.generateFrameNumbers('haroldEyesSheet', { start: 0, end: 21, }),
+            repeat: 0,
+            frameRate: 4,
+        })
+        
+
+        
         this.cat = this.add.sprite(100, 20, 'harold').setOrigin(0,0);
         this.cat.alpha = 0;
+
+        this.endingPlayed = false;
 
         this.frameTime = 0;
     }
@@ -54,15 +76,45 @@ class Ending extends Phaser.Scene {
             this.frameTime = 0;
 
             
-            this.hugh.update();
+            if (!this.endingPlayed) this.hugh.update();
 
             if(this.hugh.x >= 650){
-                console.log("ending trigger");
-                this.hugh.body.setVelocity(0);
-                this.input.keyboard.enabled = false;
-                this.hugh.anims.play('idle');
+                if (!this.endingPlayed) {
+                    this.hugh.breathe.stop();
+                    this.endingPlayed = true;
+                    this.hugh.body.setVelocity(0);
+                    this.input.keyboard.enabled = false;
+                    this.hugh.anims.play('idle');
+                    this.endingAnim();
+                }
+                
             }
 
         }
+    }
+
+    endingAnim() {
+        this.time.delayedCall(2000, () => {
+            this.hugh.flipX = true;
+            //this.time.delayedCall(1000, () => {this.fard.play();}, null, this)
+            this.time.delayedCall(1000, () => {this.animTarget.anims.play('haroldEyesMorph');}, null, this);
+            this.animTarget.on('animationcomplete', () => {
+                this.time.delayedCall(2000, () => {
+                    //this.animTarget.alpha = 0;
+                    this.harold.alpha = 1;
+                    this.blackRect.alpha = 0;
+                    this.meow.play();
+                    this.time.delayedCall(2000, () => {
+                        this.harold.setTexture('haroldMuscle');
+                        this.time.delayedCall(2000, () => {
+                            this.hugh.setTexture('hughMuscle');
+                            this.hugh.x -= 55
+                            this.hugh.flipX = false;
+                            this.time.delayedCall(2000, () => {this.scene.start('credits');});
+                        })
+                    })
+                }, null, this);
+            })
+        }, null, this);
     }
 }
