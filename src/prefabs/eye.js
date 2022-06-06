@@ -71,14 +71,14 @@ class Eye extends Phaser.GameObjects.Sprite {
         this.blinkInterval = blinkInterval;
 
         this.scene.time.delayedCall(startDelay, () => {
-            if (this.texture.key == 'sideeye') this.blink();
+            this.blink();
         }, null, this.scene);
-        if (this.texture.key == 'eyeDownSheet') {
+        //if (this.texture.key == 'eyeDownSheet') {
             //this.play('idleBlack');
-            this.scene.time.delayedCall(this.startDelay, () => {
-                this.canyonBlink();
-            })
-        }
+        //    this.scene.time.delayedCall(this.startDelay, () => {
+        //        this.canyonBlink();
+        //    })
+        //}
         
     }
 

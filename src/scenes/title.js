@@ -28,7 +28,7 @@ class Title extends Phaser.Scene { //we can use menu to load all the assets for 
     }
 
     update() {
-        //this.scene.start('ending');
+        //this.scene.start('canyon');
 
         //finished is a variable that keeps track of whether or not the player has played through the game once already.
         //we don't want to show the controls to a player who has already beaten the game.

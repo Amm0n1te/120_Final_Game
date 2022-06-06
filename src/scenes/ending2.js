@@ -72,10 +72,10 @@ class Ending2 extends Phaser.Scene {
                     this.deathPlayed = true;
                     this.hugh.breathe.stop();
                     this.hugh.anims.play('handmorph');
-                    this.hugh.on('animationcomplete', () => {
+                    this.time.delayedCall(2000, () => {
                         this.input.keyboard.enabled = true;
                         this.scene.start('credits');
-                    });
+                    }, null, this);
                     
                 }
                 

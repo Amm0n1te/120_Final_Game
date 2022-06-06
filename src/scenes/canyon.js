@@ -71,7 +71,7 @@ class Canyon extends Phaser.Scene {
         this.door = this.add.sprite(game.config.width+50, -220, 'door').setOrigin(1, 0);
 
         //canyon walls
-        this.leftWallVisual = this.add.sprite(1.2*game.config.width/6, game.config.height/2, 'wall');
+        this.leftWallVisual = this.add.sprite(1.2*game.config.width/6 - 100, game.config.height/2, 'wall');
         this.rightWallVisual = this.add.sprite(6.4*game.config.width/6, 2.7*game.config.height/4, 'wall2');
         this.leftWallBound = this.physics.add.sprite(game.config.width/6-10, game.config.height/2, 'wall');
         this.leftWallBound.body.immovable = true;
@@ -125,9 +125,13 @@ class Canyon extends Phaser.Scene {
             this.hugh.update();
             this.mist.tilePositionX += 1;
             if (this.hugh.y >= this.rightWallBound.y-this.rightWallBound.height && this.hugh.x+this.hugh.width >= game.config.width) {
-                if (this.hugh.color == 1) endingColor = "black";
-                else if (this.hugh.color == -1) endingColor = "gray";
-                this.scene.start("ending");
+                if (this.hugh.color == 1){
+                    this.scene.start("ending");
+                }
+                else if (this.hugh.color == -1){
+                    this.scene.start("ending2");
+                }
+                
             }
 
         }
@@ -141,10 +145,8 @@ class Canyon extends Phaser.Scene {
             if ((this.hugh.x+this.hugh.width+this.hugh.strikeDistance > object.x && this.hugh.x < object.x)) {
                 if (object.texture.key == 'shrine'){
                     this.hugh.color = -1; 
-                    ending = -1;
                 }else{
                     this.hugh.color = 1;
-                    ending = 1;
                 } 
                 
             }
