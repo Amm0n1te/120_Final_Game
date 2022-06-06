@@ -13,6 +13,7 @@ class Loading extends Phaser.Scene {
         this.load.image('keysImage', 'assets/controls.png');
         this.load.image('space', 'assets/space.png');
         this.load.image('crazy_cat', 'assets/crazy_cat_3.png');
+        this.load.image('harold', 'assets/harold.png');
 
 
         //level 1
@@ -57,6 +58,12 @@ class Loading extends Phaser.Scene {
         this.load.image('wall', 'assets/wall1.png');
         this.load.image('wall2', 'assets/wall2.png');
         this.load.image('ledgeCollider', 'assets/ledgeCollider.png');
+        this.load.spritesheet('eyeDownSheet', 'assets/eyeDownSheetPlaceholder.png', {frameWidth: 120, frameHeight: 120, startFrame: 0, endFrame: 10});
+        this.load.image('blackBeam', 'assets/blackBeam.png');
+        this.load.image('grayBeam', 'assets/grayBeam.png');
+
+        //endings
+        this.load.spritesheet('hughHandSheet', 'assets/hughHandSheet.png', {frameWidth: 80, frameHeight: 130, startFrame: 0, endFrame: 31});
 
         //text transitions
         this.load.spritesheet('level1text', 'assets/level1Text.png', {frameWidth: 960, frameHeight: 720, startFrame: 0, endFrame: 1});

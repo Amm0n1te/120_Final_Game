@@ -2,7 +2,7 @@ class Player extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);
-        scene.tweens.add({
+        this.breathe = scene.tweens.add({
             targets: this,
             scale: 1.05,
             duration: 900,
@@ -71,6 +71,12 @@ class Player extends Phaser.GameObjects.Sprite {
             repeat: 0,
             frameRate: 30
         })
+        this.handmorph = this.anims.create({
+            key: 'handmorph',
+            frames: this.anims.generateFrameNumbers('hughHandSheet', {start: 0, end: 31}),
+            repeat: 0,
+            frameRate: 30
+        })
 
         this.strikeDistance = 40;
         
@@ -127,7 +133,7 @@ class Player extends Phaser.GameObjects.Sprite {
             this.flipX = false;
             this.body.setVelocityX(this.speed);
         }
-        if (!this.leftWalking && !this.rightWalking) this.body.setVelocityX(0);
+        if ((!this.leftWalking && !this.rightWalking) || this.dying) this.body.setVelocityX(0);
 
         if (this.body.touching.down && Phaser.Input.Keyboard.JustDown(keyUP)&& this.dying == false) {
             this.body.setVelocityY(-900);
@@ -138,9 +144,6 @@ class Player extends Phaser.GameObjects.Sprite {
                 this.play('hughJumpGray');
             }
             
-            //stop all running animations
-            //start jump animations
-            //this.jumpControl = true;
         }
 
         //color changing
@@ -166,15 +169,11 @@ class Player extends Phaser.GameObjects.Sprite {
     die(){
         this.dying = true;
         this.scene.input.keyboard.enabled = false;
-        //this.stop('idle');
         this.play('hughDeath');
         this.deathSound.play();
         this.on('animationcomplete', () => {
-            //this.time.delayedCall(500, () => { 
-                //this.playMusic.stop();
                 this.scene.input.keyboard.enabled = true;
                 this.scene.scene.restart();
-            //}, null, this);
         });
     }
 

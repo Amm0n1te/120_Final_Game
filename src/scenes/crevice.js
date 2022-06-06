@@ -6,8 +6,6 @@ class Crevice extends Phaser.Scene {
 
     create() {
         this.add.sprite(0, 0, 'creviceBG').setOrigin(0, 0);
-        //this.background = this.add.tileSprite(0,0, 960, 720, 'creviceBG').setOrigin(0, 0);
-        //this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
         this.frameTime = 0;
         this.physics.world.gravity.y = 2000;
         this.MAX_VELOCITY = 300;

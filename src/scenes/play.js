@@ -63,7 +63,7 @@ class Play extends Phaser.Scene {
         this.strikeDistance = 40;
 
         
-    }//bootyassbuttballspeenischeekspoopoopeepeecacadoodoosheissekusocoulemerdemierdacolanaalgasarschloechleanusnostaobojken
+    }
 
     update(time, delta) {
         this.frameTime += delta;

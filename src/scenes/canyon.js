@@ -1,3 +1,5 @@
+
+
 class Canyon extends Phaser.Scene {
 
     constructor() {
@@ -17,11 +19,6 @@ class Canyon extends Phaser.Scene {
         this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
         this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
         this.hugh = new Player(this, game.config.width/2, 445, 'hugh', 0).setOrigin(0,0);
-        this.hugh.body.checkCollision.left = true;
-        this.hugh.body.checkCollision.right = true;
-        
-        
-
 
         //ground
         this.groundground = this.add.sprite(game.config.width/2, 757, 'floor');
@@ -40,9 +37,7 @@ class Canyon extends Phaser.Scene {
         this.shrine1 = this.add.sprite(360, 480, 'shrine').setOrigin(0, 0);
         this.shrine1.setScale(1.2);
         this.shrine1.play('shrineAnim');
-        this.shrine2 = this.add.sprite(330, 135, 'shrine').setOrigin(0, 0);
-        this.shrine2.setScale(1.2);
-        this.shrine2.play('shrineAnim');
+
         this.cairn = this.add.sprite(580, 320, 'cairn').setOrigin(0, 0);
         this.cairn.setScale(1.2);
         this.anims.create({
@@ -99,12 +94,23 @@ class Canyon extends Phaser.Scene {
             this.frameTime = 0;
 
             //console.log(this.hugh.y+this.hugh.height, " >= ", this.ledge1Collider.y)
+            /*this.beam1.y = this.eye.y + 100;
+
+            if(this.eye.frame == 10){
+                console.log('gray');
+                this.beam1.alpha = 1;
+                this.beam1.setTexture('grayBeam');
+            }else if(this.eye.frame == 0){
+                console.log('black');
+                this.beam1.alpha = 1;
+                this.beam1.setTexture('blackBeam');
+            } //else this.beam1.alpha = 0;*/
             
             //hugh input checking
             if (Phaser.Input.Keyboard.JustDown(spacebar) && !keyLEFT.isDown && !keyRIGHT.isDown && this.hugh.body.touching.down) {
                if (this.hugh.y+this.hugh.height > this.ledge2Collider.y) {this.checkHit(this.shrine1)}
                else if (this.hugh.y+this.hugh.height > this.ledge3Collider.y) {this.checkHit(this.cairn)}
-               else {this.checkHit(this.shrine2)}
+               //else {this.checkHit(this.shrine2)}
 
                 if (this.hugh.color == 1) {
                     this.hugh.play('idle');
@@ -113,21 +119,34 @@ class Canyon extends Phaser.Scene {
                     this.hugh.play('grayIdle');
                 }
             }
+            //this.eye.y = this.hugh.y-300;
+            //this.eye.update(this.hugh);
 
             this.hugh.update();
             this.mist.tilePositionX += 1;
             if (this.hugh.y >= this.rightWallBound.y-this.rightWallBound.height && this.hugh.x+this.hugh.width >= game.config.width) {
+                if (this.hugh.color == 1) endingColor = "black";
+                else if (this.hugh.color == -1) endingColor = "gray";
                 this.scene.start("ending");
             }
 
         }
     }
 
+
+
+
     checkHit(object) {
         if (this.hugh.flipX == false) { //check if he hit something when he's facing right
             if ((this.hugh.x+this.hugh.width+this.hugh.strikeDistance > object.x && this.hugh.x < object.x)) {
-                if (object.texture.key == 'shrine') this.hugh.color = -1;
-                else this.hugh.color = 1;
+                if (object.texture.key == 'shrine'){
+                    this.hugh.color = -1; 
+                    ending = -1;
+                }else{
+                    this.hugh.color = 1;
+                    ending = 1;
+                } 
+                
             }
         }
         else if (this.hugh.flipX == true) { //check if he hit something when he's facing left

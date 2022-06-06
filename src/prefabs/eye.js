@@ -7,6 +7,9 @@ class Eye extends Phaser.GameObjects.Sprite {
         this.spottedDuration = 0;
         this.maxSpotted = 20;
         this.eyeStatus = -1;
+        this.canyonColor = 1; //1 for black, -1 for gray
+        this.startDelay = 1000;
+        this.blinkInterval = 4000;
         this.anims.create({
             key: 'blink',
             frames: this.anims.generateFrameNumbers('sideeyeBlink', { start: 0, end: 4, }),
@@ -37,6 +40,25 @@ class Eye extends Phaser.GameObjects.Sprite {
             repeat: 0,
             frameRate: 5
         })
+        this.anims.create({   //eyeDown blink, iris changes from black to grey
+            key: 'blinkBG',  
+            frames: this.anims.generateFrameNumbers('eyeDownSheet', { start: 0, end: 10 }),
+            repeat: 0,
+            framerate: 20 //this doesn't affect the framerate for some reason
+        })
+        this.anims.create({
+            key: 'blinkGB',
+            frames: this.anims.generateFrameNumbers('eyeDownSheet', { start: 10, end: 0 }),
+            repeat: 0, 
+            frameRate: 20
+        })
+        this.anims.create({
+            key: 'idleBlack',
+            frames: this.anims.generateFrameNumbers('eyeDownSheet', { start: 0, end: 0}),
+            repeat: 0,
+            frameRate: 0
+        })
+
     }
 
     //use only with side facing eye
@@ -44,11 +66,20 @@ class Eye extends Phaser.GameObjects.Sprite {
         if (this.texture.key == 'sideeye'){
             this.play('closed');
         } 
+
         this.startDelay = startDelay;
         this.blinkInterval = blinkInterval;
+
         this.scene.time.delayedCall(startDelay, () => {
-            this.blink();
+            if (this.texture.key == 'sideeye') this.blink();
         }, null, this.scene);
+        if (this.texture.key == 'eyeDownSheet') {
+            //this.play('idleBlack');
+            this.scene.time.delayedCall(this.startDelay, () => {
+                this.canyonBlink();
+            })
+        }
+        
     }
 
     blink() {
@@ -58,13 +89,18 @@ class Eye extends Phaser.GameObjects.Sprite {
         }else{
             this.play("close");
         }
-        //console.log("blink from ", this.texture.key);
-        //this.play("open");
-        //this.on('animationcomplete', () => {
-        //    this.play("close");
-        //});
         this.scene.time.delayedCall(this.blinkInterval, () => {
             this.blink();
+        })
+    }
+
+    canyonBlink() {
+        console.log("in canyonBlink");
+        this.canyonColor *= -1; //1 for black, -1 for gray
+        if (this.canyonColor == 1) this.play("blinkGB");
+        else if (this.canyonColor == -1) this.play("blinkBG");
+        this.scene.time.delayedCall(this.blinkInterval, () => {
+            this.canyonBlink();
         })
     }
 
@@ -72,8 +108,8 @@ class Eye extends Phaser.GameObjects.Sprite {
     update(Player) {
         //eye collision
 
-
-        this.checkSight(Player);
+        if (this.texture.key == 'eyeDownSheet') this.canyonUpdate(Player);
+        else this.checkSight(Player);
     }
 
     checkSight(Player) {
@@ -98,6 +134,10 @@ class Eye extends Phaser.GameObjects.Sprite {
 
 
         }
+    }
+
+
+    canyonUpdate(Player) {
     }
 
 }

@@ -7,17 +7,17 @@ let config = {
         default: 'arcade',
         fps: 60,
         arcade: {
-            debug: true,
+            debug: false,
             gravity: {
                 x: 0,
                 y: 0
             }
         }
     },
-    scene: [Loading, Title, TextTransition, Play, Forest, Crevice, Canyon, Ending, Test],
+    scene: [Loading, Title, TextTransition, Play, Forest, Crevice, Canyon, Ending, Ending2, Test],
 };
 
 let keyLEFT, keyRIGHT, keyUP, spacebar; 
 let finished = false;
-
+let endingColor = "black";
 let game = new Phaser.Game(config);

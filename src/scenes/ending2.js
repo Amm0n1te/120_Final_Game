@@ -1,6 +1,6 @@
-class Ending extends Phaser.Scene {
+class Ending2 extends Phaser.Scene {
     constructor() {
-        super('ending');
+        super('ending2');
     }
 
     create() {
@@ -13,25 +13,19 @@ class Ending extends Phaser.Scene {
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        //this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
-        //this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
+        this.background = this.add.tileSprite(0,0, 960, 720, 'background').setOrigin(0, 0);
+        this.mist = this.add.tileSprite(0, 0, 960, 720, 'mist').setOrigin(0, 0);
 
-
+        this.hands = this.add.sprite(0, 0, 'hands').setOrigin(0,0);
+        this.hands.flipX = true;
         //
 
         
-        this.whiteRect = this.add.rectangle(0, 0, 960, 720, 0xFFFFFF).setOrigin(0, 0);
-        this.blackRect = this.add.rectangle(0, 0, 960, 720, 0x000000).setOrigin(0, 0);
         this.hugh = new Player(this, 88, 445, 'hugh', 0).setOrigin(0,0);
+        this.deathPlayed = false;
 
-        this.leftWallBound = this.physics.add.sprite(900, game.config.height/2, 'wall');
-        this.leftWallBound.body.immovable = true;
-        this.leftWallBound.body.allowGravity = false;
-        this.physics.add.collider(this.hugh, this.leftWallBound);
-        this.leftWallBound.alpha = 0;
         
-        //this.shrine = this.add.sprite(460, 500, 'shrine').setOrigin(0, 0);
-        //this.shrine.setScale(1.2);
+
 
         this.testPlatform = this.physics.add.sprite(game.config.width/2, 640, 'floor');
         this.testPlatform.body.immovable = true;
@@ -40,6 +34,10 @@ class Ending extends Phaser.Scene {
 
         this.frontGround = this.add.sprite(game.config.width/2, 610, 'floor');
         this.bottomGround = this.add.sprite(game.config.width/2, 730, 'floor');
+
+        
+        //this.checkpoint1 = this.add.sprite(400, 650, 'crazy_cat').setScale(0.4);
+        //this.checkpoint2 = this.add.sprite(600, 650, 'crazy_cat').setScale(0.3);
 
         
         this.cat = this.add.sprite(100, 20, 'harold').setOrigin(0,0);
@@ -55,12 +53,27 @@ class Ending extends Phaser.Scene {
 
             
             this.hugh.update();
+            this.mist.tilePositionX += 1;
+            if (this.hugh.x >= 240 && this.hugh.x <= 260) {
+                this.hugh.speed = 180
+            }
+            if (this.hugh.x >= 400 && this.hugh.x <= 420) {
+                this.hugh.speed = 120;
+            }
+            if (this.hugh.x >= 600 && this.hugh.x <= 620) {
+                this.hugh.speed = 30;
+            }
+            
 
             if(this.hugh.x >= 650){
-                console.log("ending trigger");
                 this.hugh.body.setVelocity(0);
                 this.input.keyboard.enabled = false;
-                this.hugh.anims.play('idle');
+                if(!this.deathPlayed){
+                    this.deathPlayed = true;
+                    this.hugh.anims.play('handmorph');
+                    this.hugh.breathe.stop();
+                }
+                
             }
 
         }
